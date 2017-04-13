@@ -2,41 +2,9 @@
 {% load staticfiles %}
 {% block body %}
         <!-- reg-form -->
-	<div class="reg-form">
-		<div class="container">
-			<div class="reg">
-				<h3>用户注册</h3>
-				<p>欢迎，注册前站用户</p>
-				<p>如果你已注册, 请<a href="#">点击这里</a></p>
-				 <form>
-					<ul>
-						<li class="text-info">姓名 </li>
-						<li><input type="text" value=""></li>
-					</ul>
-					<ul>
-						<li class="text-info">Last Name: </li>
-						<li><input type="text" value=""></li>
-					 </ul>				 
-					<ul>
-						<li class="text-info">Email: </li>
-						<li><input type="text" value=""></li>
-					</ul>
-					<ul>
-						<li class="text-info">Password: </li>
-						<li><input type="password" value=""></li>
-					</ul>
-					<ul>
-						<li class="text-info">Re-enter Password:</li>
-						<li><input type="password" value=""></li>
-					</ul>
-					<ul>
-						<li class="text-info">Mobile Number:</li>
-						<li><input type="text" value=""></li>
-					</ul>						
-					<input type="submit" value="Register Now">
-					<p class="click">提交意味你已确认接受我们的协议 <a href="#">Policy Terms and Conditions.</a></p>
-				</form>
-			</div>
-		</div>
-	</div>
+	<form action="{% url 'add_regist' %}" method="post">
+    {%  csrf_token %}
+    {{ publisher_form.as_p }}
+    <input type="submit" value="提交"><br>
+    </form>
  {% endblock %}

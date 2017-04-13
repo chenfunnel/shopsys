@@ -16,30 +16,33 @@ class Customer(models.Model):
     class Meta:
         db_table='customer'
         ordering=['-regist_at']
-        verbose_name_plural='customers'
+        verbose_name = '客户'
+        verbose_name_plural = verbose_name
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('regist_Customer',args=(self.slug,))
+        return reverse('regist_customer',args=(self.slug,))
 
 class Contact(models.Model):
     name = models.CharField("姓名", max_length=50)
     cardid = models.CharField("身份证号", max_length=30)
     telephont = models.CharField("手机", max_length=30)
     weixin = models.CharField("微信号", max_length=50)
-    age=models.IntegerField("年龄",max_length=5)
-    sex=models.BooleanField("性别")
+    age=models.IntegerField("年龄")
+    sex=models.BooleanField("性别",max_length=1,choices=((0,'男'),(1,'女'),))
     description = models.TextField("描述")
     is_active = models.BooleanField("是否有效", default=True)
     create_at = models.DateTimeField("新增时间", auto_now_add=True)
     update_at = models.DateTimeField("修改时间", auto_now=True)
+    customer=models.ForeignKey(Customer)
 
     class Meta:
         db_table = 'contact'
         ordering = ['-create_at']
-        verbose_name_plural = 'contacts'
+        verbose_name = '联系人'
+        verbose_name_plural = verbose_name
 
     def __str__(self):
         return self.name
