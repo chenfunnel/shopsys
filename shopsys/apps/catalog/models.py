@@ -12,7 +12,7 @@ class Category(models.Model):
     create_at=models.DateTimeField("创建时间",auto_now_add=True)
     update_at=models.DateTimeField("修改时间",auto_now=True)
 
-    class META:
+    class Meta:
         db_table='categories'
         ordering=['-create_at']
         verbose_name_plural='Categories'
@@ -42,7 +42,7 @@ class Product(models.Model):
     update_at = models.DateTimeField("修改时间", auto_now=True)
     categories=models.ManyToManyField(Category)
 
-    class META:
+    class Meta:
         db_table='products'
         ordering=['-create_at']
     def __str__(self):
