@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block body %}
+    <div class="header-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="user-menu">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-user"></i> 用户</a></li>
+                            <li><a href="#"><i class="fa fa-heart"></i> 收藏</a></li>
+                            <li><a href="cart.html"><i class="fa fa-user"></i> 我的购物车</a></li>
+                            <li><a href="#"><i class="fa fa-user"></i> 登录</a></li>
+                        </ul>
+                    </div>
+                </div>
+              </div>
+        </div>
+    </div> <!-- End header area -->
+        <div class="site-branding-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="logo">
+                        <h1><a href="./"><img src="{%  static "img/logo.png"%}"></a></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End site branding area -->
+    <div class="mainmenu-area">
+        <div class="container">
+            <div class="row">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="index.html">首页</a></li>
+                        <li><a href="shop.html">酒店</a></li>
+                        <li><a href="single-product.html">机票</a></li>
+                        <li><a href="cart.html">火车票</a></li>
+                        <li><a href="cart.html">旅游</a></li>
+                        <li><a href="cart.html">特产</a></li>
+                        <li><a href="#">联系我们</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+{% block content %}{% endblock %}
+
+{% endblock %}
