@@ -4,7 +4,8 @@ from django.http import HttpRequest,HttpResponse
 
 # Create your views here.
 
-def index(request):
+def regist(request):
+    print ('111')
     page_title='注册'
     return render(request,'regist/index.html',locals())
 

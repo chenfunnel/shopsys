@@ -21,6 +21,8 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^',include('shopsys.apps.catalog.urls')),
-    url(r'^',include('shopsys.apps.regist.urls')),
+    url(r'^regist/',include('shopsys.apps.regist.urls')),
+    url(r'^catalog/',include('shopsys.apps.catalog.urls')),
+
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+
