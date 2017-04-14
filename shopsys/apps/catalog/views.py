@@ -5,6 +5,7 @@ from .models import Category,Product
 
 def index(request):
     page_title='产品分类目录'
+    username= request.session.get('username',default=None)
     return render(request,'catalog/index.html',locals())
 
 def show_category(request,category_slug):

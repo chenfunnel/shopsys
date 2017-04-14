@@ -1,0 +1,23 @@
+{% extends "registbase.html" %}
+{% load staticfiles %}
+{% block content %}
+<div style="margin-left: 200px">
+{% if Method == 'GET' %}
+    <form method ="post">
+        {% csrf_token %}
+        {{uf.as_p}}
+        <input type="submit" name="regist" value="注册">
+    </form>
+{% else %}
+    {% if not errors %}
+        {{username}} 注册成功!
+        <br>
+        <a href="/login">登录</a>
+    {% else %}
+        {{ errors }}
+        <br>
+        <a href="/regist/regist">注册</a>
+    {% endif %}
+{% endif %}
+</div>
+{% endblock %}

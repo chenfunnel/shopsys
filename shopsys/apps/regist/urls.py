@@ -24,6 +24,8 @@ from shopsys.apps.regist import  views
 # ]
 
 urlpatterns = [
+    url(r'^$', views.index,name='index'),
     url(r'^regist/$', views.regist,name='regist'),
-    url(r'^add_regist/$', views.add_regist,name='add_regist'),
+    url(r'^login/$', views.login,name='login'),
+    url(r'^logout/$', views.logout,name='logout'),
 ]

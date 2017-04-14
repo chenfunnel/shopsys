@@ -9,7 +9,7 @@ class CustomerForm(forms.ModelForm):
         value = cleaned_data.get("name")
         try:
             Customer.objects.get(name=value)
-            self.errors["name"] = self.error_class(["%s的出版社信息已存在" % value])
+            self.errors["name"] = self.error_class(["%sx客户已存在" % value])
         except Customer.DoesNotExist:
             pass
         return cleaned_data
@@ -17,3 +17,17 @@ class CustomerForm(forms.ModelForm):
     class Meta:
         model = Customer
         exclude = {"id", }
+
+# Create your views here.
+#用户注册表单
+class UserForm(forms.Form):
+    name  = forms.CharField(label="姓  名",max_length=50)
+    telephone =forms.CharField(label="手机号码",max_length=50)
+    username  = forms.CharField(label='用 户 名',max_length=50)
+    password1 = forms.CharField(label='密   码',widget=forms.PasswordInput())
+    password2 = forms.CharField(label='确认密码',widget=forms.PasswordInput())
+#用户登录表单
+class LoginForm(forms.Form):
+    username = forms.CharField(label='用户名',max_length=50)
+    password = forms.CharField(label='密  码',widget=forms.PasswordInput())
+

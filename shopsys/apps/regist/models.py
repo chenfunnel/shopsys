@@ -4,9 +4,9 @@ from django.core.urlresolvers import reverse
 # Create your models here.
 class Customer(models.Model):
     name=models.CharField("姓名",max_length=50)
-    loginname=models.CharField("登录名",max_length=30)
+    loginname=models.CharField("登录名",max_length=30,unique=True)
     password=models.CharField("密码",max_length=30)
-    telephont=models.CharField("手机",max_length=30)
+    telephone=models.CharField("手机",max_length=30)
     weixin=models.CharField("微信号",max_length=50)
     description=models.TextField("描述")
     is_active=models.BooleanField("是否有效",default=True)
@@ -28,7 +28,7 @@ class Customer(models.Model):
 class Contact(models.Model):
     name = models.CharField("姓名", max_length=50)
     cardid = models.CharField("身份证号", max_length=30)
-    telephont = models.CharField("手机", max_length=30)
+    telephone = models.CharField("手机", max_length=30)
     weixin = models.CharField("微信号", max_length=50)
     age=models.IntegerField("年龄")
     sex=models.BooleanField("性别",max_length=1,choices=((0,'男'),(1,'女'),))
