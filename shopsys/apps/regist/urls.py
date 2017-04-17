@@ -27,5 +27,10 @@ urlpatterns = [
     url(r'^$', views.index,name='index'),
     url(r'^regist/$', views.regist,name='regist'),
     url(r'^login/$', views.login,name='login'),
+    url(r'^user/$', views.user,name='user'),
+    url(r'^maps/$', views.maps,name='map'),
+    url(r'^contact/$', views.contact,name='contact'),
+    url(r'^notification/$', views.notificaiton,name='notification'),
+    url(r'^table/$', views.table,name='table'),
     url(r'^logout/$', views.logout,name='logout'),
 ]

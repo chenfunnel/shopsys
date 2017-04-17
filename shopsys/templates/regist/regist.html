@@ -1,23 +1,105 @@
-{% extends "registbase.html" %}
 {% load staticfiles %}
-{% block content %}
-<div style="margin-left: 200px">
-{% if Method == 'GET' %}
-    <form method ="post">
-        {% csrf_token %}
-        {{uf.as_p}}
-        <input type="submit" name="regist" value="注册">
-    </form>
-{% else %}
-    {% if not errors %}
-        {{username}} 注册成功!
-        <br>
-        <a href="/login">登录</a>
-    {% else %}
-        {{ errors }}
-        <br>
-        <a href="/regist/regist">注册</a>
-    {% endif %}
-{% endif %}
-</div>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <title>
+        {% block title %}
+            {% if page_title %} {{ page_title }}-{% endif %}{{ site_name }}
+        {% endblock %}
+    </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="{{ meta_keywords }}" />
+	    <meta name="description" content="{{ meta_description }}" />
+        <!--  login and regist     -->
+        <link href="{% static "/css/bootstrap.min.css" %}" rel="stylesheet" />
+        <link rel="shortcut icon" href="{% static "img/favicon.ico" %}">
+        <link rel="stylesheet" type="text/css" href="{% static  "css/demo.css" %}"/>
+        <link rel="stylesheet" type="text/css" href="{%  static "css/style.css" %}" />
+		<link rel="stylesheet" type="text/css" href="{%  static "css/animate-custom.css" %}" />
+    </head>
+    <body>
+    <div class="container-fluid" style="background-color: lightgray">
+                <div class="navbar-header">
+                     <a class="navbar-brand" href="#">用户管理</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#">
+                                <i class="ti-panel"></i>
+								<p>欢迎【】</p>
+                            </a>
+                        </li>
+                        <li >
+                              <a href="#" >
+                                <i class="ti-bell"></i>
+                                <p>登录</p>
+	                          </a>
+                       	</li>
+						<li>
+                            <a href="#">
+								<i class="ti-settings"></i>
+								<p>注销</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        <div class="container">
+            <!-- Codrops top bar -->
+                <div id="container_demo" >
+                    <!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->
+
+                    <div id="wrapper">
+                        <div id="login" class="animate form">
+                            {% if Method == 'GET' %}
+                                <form  method="post">
+                                     {% csrf_token %}
+                                    <h1> 注册 </h1>
+                                    <p>
+                                        <label for="usernamesignup" class="uname" data-icon="u">姓名</label>
+                                        <input id="usernamesignup" name="name" required="required" type="text" placeholder="mysuperusername690" />
+                                    </p>
+                                    <p>
+                                        <label for="emailsignup" class="uname" data-icon="u" > 用户名</label>
+                                        <input id="loginname" name="username" required="required" type="text" placeholder="myusername"/>
+                                    </p>
+                                    <p>
+                                        <label for="passwordsignup" class="youpasswd" data-icon="p">密码 </label>
+                                        <input id="passwordsignup" name="password1" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                                    </p>
+                                    <p>
+                                        <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">确认密码</label>
+                                        <input id="passwordsignup_confirm" name="password2" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                                    </p>
+                                    <p class="signin button">
+                                        <input type="submit" value="提交"/>
+                                    </p>
+                                    <p class="change_link">
+                                        已有账户吗 ?
+                                        <a href="/regist/login" class="to_register"> 登录 </a>
+                                    </p>
+                                </form>
+                            {% else %}
+                                {% if not errors %}
+                                    {{username}} 注册成功!
+                                    <br>
+                                    <a href="/regist/login">登录</a>
+                                {% else %}
+                                    {{ errors }}
+                                    <br>
+                                    <a href="/regist/regist">注册</a>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+        </div>
+       <div id="Foot-Left">
+            <div style="float:right; line-height:40px; ">
+            &copy; <script>document.write(new Date().getFullYear())</script>, 制作单位：西安前站信息技术有限公司
+            </div>
+        </div>
+    </body>
+</html>

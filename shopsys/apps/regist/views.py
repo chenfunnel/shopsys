@@ -24,8 +24,8 @@ def regist(request):
         #如果有post提交的动作，就将post中的数据赋值给uf，供该函数使用
         uf = UserForm(request.POST)
         if uf.is_valid():
+            print(uf.cleaned_data['name'])
             name=uf.cleaned_data['name']
-            telephone=uf.cleaned_data['telephone']
             username = uf.cleaned_data['username']
             password1 = uf.cleaned_data['password1']
             password2 = uf.cleaned_data['password2']
@@ -43,7 +43,7 @@ def regist(request):
                 return render(request,'regist/regist.html',locals())
             #except :
             if not errors:
-                registAdd = Customer.objects.create(name=name,loginname=username,password=password,telephone=telephone)
+                registAdd = Customer.objects.create(name=name,loginname=username,password=password)
                 return render (request,'regist/regist.html',locals())
 
     else:
@@ -67,7 +67,7 @@ def login(request):
 
             if userPassJudge:
                 request.session['username'] = username
-                response = HttpResponseRedirect('/catalog/')
+                response = HttpResponseRedirect('/regist/')
 
                 return response
             else:
@@ -80,10 +80,29 @@ def login(request):
 
 def index(request):
     username = request.session.get('username', default=None)
-    return render(request,'regist/index.html',locals())
+    return render(request,'regist/dashboard.html',locals())
 
 def logout(request):
-    response = HttpResponseRedirect('/catalog/')
+    response = HttpResponseRedirect('/regist/')
     del request.session['username']
     return  response
 
+def user(request):
+    username = request.session.get('username', default=None)
+    return render(request,'regist/user.html',locals())
+
+def table(request):
+    username = request.session.get('username', default=None)
+    return render(request,'regist/table.html',locals())
+
+def maps(request):
+    username = request.session.get('username', default=None)
+    return render(request,'regist/maps.html',locals())
+
+def notificaiton(request):
+    username = request.session.get('username', default=None)
+    return render(request,'regist/notifications.html',locals())
+
+def contact(request):
+    username = request.session.get('username', default=None)
+    return render(request,'regist/contact.html',locals())

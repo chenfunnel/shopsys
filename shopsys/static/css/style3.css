@@ -10,21 +10,21 @@
 /** fonts used for the icons **/ 
 @font-face {
     font-family: 'FontomasCustomRegular';
-    src: url('../fonts/fontomas-webfont.eot');
-    src: url('../fonts/fontomas-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/fontomas-webfont.woff') format('woff'),
-         url('../fonts/fontomas-webfont.ttf') format('truetype'),
-         url('../fonts/fontomas-webfont.svg#FontomasCustomRegular') format('svg');
+    src: url('fonts/fontomas-webfont.eot');
+    src: url('fonts/fontomas-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/fontomas-webfont.woff') format('woff'),
+         url('fonts/fontomas-webfont.ttf') format('truetype'),
+         url('fonts/fontomas-webfont.svg#FontomasCustomRegular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'FranchiseRegular';
-    src: url('../fonts/franchise-bold-webfont.eot');
-    src: url('../fonts/franchise-bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/franchise-bold-webfont.woff') format('woff'),
-         url('../fonts/franchise-bold-webfont.ttf') format('truetype'),
-         url('../fonts/franchise-bold-webfont.svg#FranchiseRegular') format('svg');
+    src: url('fonts/franchise-bold-webfont.eot');
+    src: url('fonts/franchise-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/franchise-bold-webfont.woff') format('woff'),
+         url('fonts/franchise-bold-webfont.ttf') format('truetype'),
+         url('fonts/franchise-bold-webfont.svg#FranchiseRegular') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -294,7 +294,7 @@ p.change_link{
 #login{
 	position: absolute;
 	top: 0px;
-	width: 88%;
+	width: 88%;	
 	padding: 18px 6% 60px 6%;
 	margin: 0 0 35px 0;
 	background: rgb(247, 247, 247);
@@ -316,46 +316,51 @@ p.change_link{
 #toregister:target ~ #wrapper #register,
 #tologin:target ~ #wrapper #login{
 	z-index: 22;
-	-webkit-animation-name: fadeInLeft;
-	-moz-animation-name: fadeInLeft;
-	-ms-animation-name: fadeInLeft;
-	-o-animation-name: fadeInLeft;
-	animation-name: fadeInLeft;
-	-webkit-animation-delay: .1s;
-	-moz-animation-delay: .1s;
-	-o-animation-delay: .1s;
-	-ms-animation-delay: .1s;
-	animation-delay: .1s;
+	-webkit-animation-delay: .6s;
+	-webkit-animation-timing-function: ease-in;
+	-moz-animation-delay: .6s;
+	-moz-animation-timing-function: ease-in;
+	-o-animation-delay: .6s;
+	-o-animation-timing-function: ease-in;
+	-ms-animation-delay: .6s;
+	-ms-animation-timing-function: ease-in;
+	animation-delay: .6s;
+	animation-timing-function: ease-in;
+	-webkit-animation-name: scaleIn;
+	-moz-animation-name: scaleIn;
+	-ms-animation-name: scaleIn;
+	-o-animation-name: scaleIn;
+	animation-name: scaleIn;
 }
 #toregister:target ~ #wrapper #login,
 #tologin:target ~ #wrapper #register{
-	-webkit-animation-name: fadeOutLeft;
-	-moz-animation-name: fadeOutLeft;
-	-ms-animation-name: fadeOutLeft;
-	-o-animation-name: fadeOutLeft;
-	animation-name: fadeOutLeft;
+	-webkit-animation-timing-function: ease-out;
+	-moz-animation-timing-function: ease-out;
+	-o-animation-timing-function: ease-out;
+	-ms-animation-timing-function: ease-out;
+	animation-timing-function: ease-out;
+	-webkit-animation-name: scaleOut;
+	-moz-animation-name: scaleOut;
+	-ms-animation-name: scaleOut;
+	-o-animation-name: scaleOut;
+	animation-name: scaleOut;
 }
 
 /** the actual animation, credit where due : http://daneden.me/animate/ ***/
 .animate{
 	-webkit-animation-duration: 0.5s;
-	-webkit-animation-timing-function: ease;
 	-webkit-animation-fill-mode: both;
 	
 	-moz-animation-duration: 0.5s;
-	-moz-animation-timing-function: ease;
 	-moz-animation-fill-mode: both;
 	
 	-o-animation-duration: 0.5s;
-	-o-animation-timing-function: ease;
 	-o-animation-fill-mode: both;
 	
 	-ms-animation-duration: 0.5s;
-	-ms-animation-timing-function: ease;
 	-ms-animation-fill-mode: both;
 	
 	animation-duration: 0.5s;
-	animation-timing-function: ease;
 	animation-fill-mode: both;
 }
 
@@ -380,11 +385,4 @@ p.change_link{
 	position: absolute;
 	height: 90px;
 	background: transparent;
-}
-#Foot-Left{
-    height:40px;
-	width:100%;
-	margin-top:20px;
-    float:right;/*设置浮动，实现多列效果，div+Css布局中很重要的*/
-    background: lightgray;
 }
