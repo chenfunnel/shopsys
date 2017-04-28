@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'shopsys.apps.catalog',
     'shopsys.apps.regist',
+    'shopsys.apps.plan',
 ]
 
 MIDDLEWARE = [

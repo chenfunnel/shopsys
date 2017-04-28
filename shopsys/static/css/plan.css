@@ -1,0 +1,179 @@
+@charset "utf-8";
+.wrapper .main-panel1 .content .plan_1 {
+	margin: 1px;
+	width: 100%;
+	overflow: auto;
+	border: 1px solid rgb(204,204,204);
+}
+.plan_2 {
+	margin: 1px;
+	width: 49%;
+	overflow: auto;
+	float: right;
+	border: 1px solid #CCC;
+	height: 845px;
+}
+.plan_1_1 {
+	height: 220px;
+	border: 1px solid rgb(204,204,204);
+}
+.plan_1_2 {
+	height: 220px;
+	border: 1px solid rgb(204,204,204);
+}
+.plan_1_3 {
+	height: 220px;
+	border: 1px solid rgb(204,204,204);
+	overflow: auto;
+}
+.wrapper .main-panel1 .content .plan_detail_left {
+	width: 40%;
+}
+.wrapper .main-panel1 .content .plan_detail_left .plan_1 .col-xs-6 .plan_text {
+	font-size: 24px;
+	font-weight: bold;
+}
+
+}
+.footer .plan_detail_foot {
+	height: 30px;
+	width: 100px;
+}
+.plan_content {
+	overflow: auto;
+	width: 100%;
+}
+.plan_content .plan_detail_left {
+	float: left;
+	width: 50%;
+	overflow: auto;
+}
+.plan_content .plan_detail_left .plan_1 {
+	border: 1px solid #CCC;
+	overflow: auto;
+	height: 185px;
+	width: 100%;
+	background-color: rgb(255,255,204);
+}
+.plan_content .plan_detail_left .plan_1 div .plan_text {
+	font-size: 24px;
+	font-weight: bolder;
+}
+.plan_detail_foot {
+	line-height: 50px;
+	background-color: #CCC;
+	text-align: right;
+	height: 50px;
+	width: 100%;
+}
+.plan_content .plan_detail_left .plan_1 .black_1 {
+	text-align: center;
+	width: 100%;
+	height: 100px;
+	overflow: auto;
+	margin-top: 2px;
+	margin-right: 0px;
+	margin-bottom: 2px;
+	margin-left: 0px;
+}
+.plan_content .plan_detail_left .plan_1 .black_2 {
+	width: 100%;
+	text-align: center;
+	line-height: 15px;
+	height: 15px;
+	overflow: auto;
+	margin-top: 5px;
+	margin-right: 0px;
+	margin-bottom: 5px;
+	margin-left: 0px;
+}
+.plan_content .plan_detail_left .plan_1 .black_3 {
+	width: 100%;
+	height: 15px;
+	line-height: 15px;
+	text-align: center;
+	overflow: auto;
+	margin-top: 5px;
+	margin-right: 0px;
+	margin-bottom: 5px;
+	margin-left: 0px;
+	font-size: 14px;
+}
+.plan_content .plan_detail_left .plan_1 .back_city {
+	width: 100%;
+	border: 1px solid #CCC;
+}
+.plan_content .plan_detail_left .plan_1 .black_4 {
+	width: 100%;
+	height: 15px;
+	line-height: 14px;
+	text-align: center;
+	overflow: auto;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.black_5 {
+	border: 0px none #FFF;
+	height: 25px;
+	width: 100%;
+	line-height: 25px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.black_1 {
+	height: 30px;
+	width: 100%;
+}
+.black_1 {
+	height: 20px;
+	width: 100%;
+}
+.black_2 {
+	height: 10px;
+	width: 100%;
+}
+.black_3 {
+	height: 25px;
+	width: 100%;
+	line-height: 25px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	overflow: auto;
+}
+.black_4 {
+	height: 25px;
+	width: 100%;
+	line-height: 25px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.city_1 {
+	text-align: center;
+	float: left;
+	width: 50%;
+	margin: 0px;
+}
+.city_2 {
+	float: right;
+	width: 50%;
+	margin: 0px;
+}
+.plan_top {
+	background-color: rgb(204,204,204);
+	height: 40px;
+	width: 100%;
+	margin-top: 1px;
+	margin-bottom: 4px;
+}
+.col_address_1 {
+	width: 40%;
+	float: 1eft;
+}
+.wrapper .main-panel .content .plan_frame .plan_main form .col_address_2 {
+	width: 10%;
+	float: left;
+}
+.wrapper .main-panel .content .plan_frame .plan_main form .col_address_3 {
+	float: right;
+	width: 40%;
+}
