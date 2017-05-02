@@ -1,0 +1,419 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>计划详细</title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+<!-- Bootstrap core CSS     -->
+    <link href="{% static "/css/bootstrap.min.css" %}" rel="stylesheet" />
+
+    <!-- Animation library for notifications   -->
+    <link href="{% static "/css/animate.min.css" %}" rel="stylesheet"/>
+
+    <!--  Paper Dashboard core CSS    -->
+    <link href="{% static "/css/paper-dashboard.css" %}"rel="stylesheet"/>
+
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="{% static "/css/demo.css" %}" rel="stylesheet" />
+
+    <!--  按钮     -->
+    <link href="{% static "/css/button.css" %}" rel="stylesheet" />
+
+
+    <link href="{% static "/css/themify-icons.css" %}" rel="stylesheet">
+
+    <!--  计划和地图     -->
+    <link href="{% static "/css/plan.css" %}" rel="stylesheet" />
+    <link href="{% static "/css/baidumap.css" %}" rel="stylesheet" />
+ 	<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.3"></script>
+     
+</head>
+<body>
+
+  <div class="plan_top">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">计划详细</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="danger">
+                            <a href="#">
+                                <i class="ti-panel"></i>
+								<p>欢迎【】</p>
+                            </a>
+                        </li>
+                        <li >
+                              <a href="#" >
+                                <i class="ti-bell"></i>
+                              <p>登录</p>
+	                          </a>
+                       	</li>
+						<li>
+                            <a href="#">
+								<i class="ti-settings"></i>
+								<p>注销</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+</div>
+
+<div class="plan_content">
+       <div class="plan_detail_left">
+          <div class="plan_1"> 	
+           <table width="100%">
+              <tr>
+                <td>&nbsp;</td>
+                <td width="20%" height="58" align="center"><span>出发地</span><br><span style="font-size: 22px; font; font-weight: bolder;">{{ fromcity }}</span></td>
+                <td width="20%" align="center"><span>到达地</span><br><span style="font-size: 22px; font; font-weight: bolder;">{{ tocity }}</span></td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td height="25">出发时间</td>
+                <td><strong>{{ start_at }}</strong></td>
+                <td>返回时间</td>
+                <td><strong>{{ back_at }}</strong></td>
+              </tr>
+              <tr>
+                <td height="25">目的地</td>
+                <td colspan="3"><strong>{{ target }}</strong></td>
+                </tr>
+              <tr>
+                <td height="25">交通</td>
+                <td id="traffictype" colspan="3"><strong>{{ traffictype }}</strong></td>
+                <td height="25">住宿</td>
+                <td id="hotletype" colspan="3"><strong>{{ hotletype }}</strong></td>
+              </tr>
+              <tr>
+                <td height="40">&nbsp;</td>
+                <td align="center" valign="middle"><input class="button blue round" type="button" value="修改" onclick=""/></td>
+                <td align="center" valign="middle"><input class="button blue round" type="button" value="确认" onclick=""/></td>
+                <td>&nbsp;</td>
+              </tr>
+           </table>
+     
+          </div>  
+          <div id="plan_1_1" class="plan_1_1" style="display:none">
+				<table width="100%">
+                  <tr >
+                    <td align="center" colspan="2"><strong><font color="black" size="+1" >飞机+星级宾馆</font></strong></td>
+                    <td align="center">总时间：</td>
+                    <td align="center"><strong><font color="red" size="+2" >3小时</font></strong></td>
+                    <td align="center">总费用:</td>
+                    <td align="center"><strong><font color="red" size="+2" >1200元</font></strong></td>
+                  </tr>
+                  </table>
+                  <table width="100%">
+                  <tr>
+                    <td width="24%">
+                    <span>海南航空HK8900</span><br>    
+                     <span>空中客车320</span>
+                     </td>
+                    <td width="17%" align="center">
+                    <span style="font-size: 18px; font; font-weight: bolder;">18:30</span><br>    <span>首都机场T3</span>
+                    </td>
+                    <td width="9%" align="center">----></td>
+                    <td width="18%" align="center">
+                    <span style="font-size: 18px; font; font-weight: bolder;">20:30</span><br>    
+                     <span>虹桥机场T2</span>
+                    </td>
+                    <td>经济舱</td>
+                    <td align="right" >￥<font color="red" size="+2" >850</font></td>
+                    <td align="center" valign="middle"><input class="button blue round" type="button" value="更多" onclick="showdiv(2)"/></td>
+                  </tr>
+               	  </table>
+                  <table width="100%" >
+                  <tr>
+                    <td width="24%"><img src="{% static "/img/timg.jpg" %}"  width="150" height="100" onClick="openWin('plan_house_select')">
+                     </td>
+                    <td width="30%" align="center">
+                    <span style="font-size: 14px; font; font-weight: bolder;" onClick="openWin('plan_house_select')">上海虹桥国际大酒店</span><br>    
+                    <span>虹桥路139号</span>
+                    </td>
+                    <td width="9%" align="center">五星级</td>
+                    <td align="center">商务大床房</td>
+                    <td  align="center">
+                    </td>
+                    <td align="right" >￥<font color="red" size="+2" >350</font></td>
+                    <td align="center" valign="middle"><input class="button blue round" type="button" value="更多" onclick="showdiv(1)"/></td>
+                  </tr>
+                 </table>
+          </div>
+          <div id="plan_1_2" class="plan_1_2" style="display:none">
+                  <table width="100%">
+                  <tr >
+                    <td align="center" colspan="2"><strong><font color="black" size="+1" >高铁+星级宾馆</font></strong></td>
+                    <td align="center">总时间：</td>
+                    <td align="center"><strong><font color="red" size="+2" >3小时</font></strong></td>
+                    <td align="center">总费用:</td>
+                    <td align="center"><strong><font color="red" size="+2" >900元</font></strong></td>
+                  </tr>
+                  </table>
+                  <table width="100%">
+                  <tr>
+                    <td width="24%">
+                    <span>G6680</span><br>    
+                     <span>高铁</span>
+                     </td>
+                    <td width="17%" align="center">
+                    <span style="font-size: 18px; font; font-weight: bolder;">18:30</span><br>    <span>北京西</span>
+                    </td>
+                    <td width="9%" align="center">----></td>
+                    <td width="18%" align="center">
+                    <span style="font-size: 18px; font; font-weight: bolder;">20:30</span><br>    
+                     <span>上海南</span>
+                    </td>
+                    <td>二等座</td>
+                    <td align="right" >￥<font color="red" size="+2" >550</font></td>
+                    <td align="center" valign="middle"><input class="button blue round" type="button" value="更多" onclick="showdiv(3)"/></td>
+                  </tr>
+               	  </table>
+                  <table width="100%" >
+                  <tr>
+                    <td width="24%"><img src="{% static "/img/timg.jpg" %}" width="150" height="100">
+                     </td>
+                    <td width="30%" align="center">
+                    <span style="font-size: 14px; font; font-weight: bolder;">上海虹桥国际大酒店</span><br>    
+                    <span>虹桥路139号</span>
+                    </td>
+                    <td width="9%" align="center">五星级</td>
+                    <td align="center">商务大床房</td>
+                    <td  align="center">
+                    </td>
+                    <td align="right" >￥<font color="red" size="+2" >350</font></td>
+                    <td align="center" valign="middle"><input class="button blue round" type="button" value="更多" onclick="showdiv(1)"/></td>
+                  </tr>
+                 </table>
+          </div>
+          <div id="plan_1_3" class="plan_1_3" style="display:none">
+               <table width="100%">
+                  <tr >
+                    <td align="center" colspan="2"><strong><font color="black" size="+1" >普快+商务宾馆</font></strong></td>
+                    <td align="center">总时间：</td>
+                    <td align="center"><strong><font color="red" size="+2" >13小时</font></strong></td>
+                    <td align="center">总费用:</td>
+                    <td align="center"><strong><font color="red" size="+2" >500元</font></strong></td>
+                  </tr>
+                  </table>
+                  <table width="100%">
+                  <tr>
+                    <td width="24%">
+                    <span>T220</span><br>    
+                     <span>特快</span>
+                     </td>
+                    <td width="17%" align="center">
+                    <span style="font-size: 18px; font; font-weight: bolder;">18:30</span><br>    <span>北京西</span>
+                    </td>
+                    <td width="9%" align="center">----></td>
+                    <td width="18%" align="center">
+                    <span style="font-size: 18px; font; font-weight: bolder;">20:30</span><br>    
+                     <span>上海站</span>
+                    </td>
+                    <td>硬卧</td>
+                    <td align="right" >￥<font color="red" size="+2" >200</font></td>
+                    <td align="center" valign="middle"><input class="button blue round" type="button" value="更多" onclick="showdiv(3)"/></td>
+                  </tr>
+               	  </table>
+                  <table width="100%" >
+                  <tr>
+                     <td width="20%"><img src="{% static "/img/timg.jpg" %}" width="150" height="100">
+                     </td>
+                    <td width="30%" align="center">
+                    <span style="font-size: 14px; font; font-weight: bolder;">上海汉庭商务快捷酒店</span><br>    
+                    <span>虹桥路139号</span>
+                    </td>
+                    <td width="9%" align="center">商务酒店</td>
+                    <td align="center">商务大床房</td>
+                    <td  align="center">
+                    </td>
+                    <td align="right" >￥<font color="red" size="+2" >300</font></td>
+                    <td align="center" valign="middle"><input class="button blue round" type="button" value="更多" onclick="showdiv(1)"/></td>
+                  </tr>
+                 </table>
+          </div>
+          
+  </div>
+
+      <div id="plan_2_train" class="plan_2" style="display:none">
+                <table width="100%">
+                  <tr>
+                    <th width="24%">车次</th>
+                    <th width="17%">开车时间</th>
+                    <th width="20"></th>
+                    <th width="13%">到达时间</th>
+                    <th width="10%">席次</th>
+                    <th width="15%">价格</th>
+                    <th width="9%"></th>
+                  </tr>
+                </table>
+
+      			<table width="100%">
+                  <tr>
+                    <td width="24%" height="84">
+                    <span>T220</span><br>    
+                     <span>特快</span>
+                     </td>
+                    <td width="17%" align="center">
+                    <span style="font-size: 18px; font; font-weight: bolder;">18:30</span><br>    <span>北京西</span>
+                    </td>
+                    <td width="9%" align="center">----></td>
+                    <td width="18%" align="center">
+                    <span style="font-size: 18px; font; font-weight: bolder;">20:30</span><br>    
+                     <span>上海站</span>
+                    </td>
+                    <td>硬卧</td>
+                    <td align="right" >￥<font color="red" size="+2" >200</font></td>
+                    <td align="center" valign="middle"><input class="button red round" type="button" value="预定" onclick=""/></td>
+                  </tr>
+               	  </table>
+
+      </div>    
+            <div id="plan_2_plane" class="plan_2" style="display:none">
+                <table width="100%">
+                  <tr>
+                    <th width="24%">航班</th>
+                    <th width="17%">起飞时间</th>
+                    <th width="20"></th>
+                    <th width="13%">落地时间</th>
+                    <th width="10%">舱位</th>
+                    <th width="15%">价格</th>
+                    <th width="9%"></th>
+                  </tr>
+                </table>
+                <table width="100%">
+                  <tr>
+                    <td width="24%" height="80">
+                    <span>海南航空HK8900</span><br>    
+                     <span>空中客车320</span>
+                     </td>
+                    <td width="17%" align="center">
+                    <span style="font-size: 18px; font; font-weight: bolder;">18:30</span><br>    <span>首都机场T3</span>
+                    </td>
+                    <td width="9%" align="center">----></td>
+                    <td width="18%" align="center">
+                    <span style="font-size: 18px; font; font-weight: bolder;">20:30</span><br>    
+                     <span>虹桥机场T2</span>
+                    </td>
+                    <td>经济舱</td>
+                    <td align="right" >￥<font color="red" size="+2" >850</font></td>
+                    <td align="center" valign="middle"><input class="button red round" type="button" value="预定" onclick=""/></td>
+                  </tr>
+               	  </table>
+
+      </div>    
+      	<div id="plan_2_house" class="plan_2">
+                <table width="100%">
+                  <tr>
+                    <th width="24%"></th>
+                    <th width="17%">宾馆名称</th>
+                    <th width="20"></th>
+                    <th width="13%">类型</th>
+                    <th width="10%">房型</th>
+                    <th width="15%">价格</th>
+                    <th width="9%"></th>
+                  </tr>
+                </table>
+                <table width="100%" >
+                  <tr>
+                     <td width="20%" height="130"><img src="{% static "/img/timg.jpg" %}" width="150" height="100">
+                     </td>
+                    <td width="30%" align="center">
+                    <span style="font-size: 14px; font; font-weight: bolder;">上海汉庭商务快捷酒店</span><br>    
+                    <span>虹桥路139号</span>
+                    </td>
+                    <td width="9%" align="center">商务酒店</td>
+                    <td align="center">商务大床房</td>
+                    <td  align="center">
+                    </td>
+                    <td align="right" >￥<font color="red" size="+2" >300</font></td>
+                    <td align="center" valign="middle"><input class="button red round" type="button" value="预定" onclick=""/></td>
+                  </tr>
+                 </table>
+
+        </div>
+
+</div>
+
+<div class="plan_detail_foot">                
+             &copy; <script>document.write(new Date().getFullYear())</script>, 制作单位：西安前站信息技术有限公司
+</div>
+
+</body>
+    <!--   Core JS Files   -->
+    <script src="{% static "/js/jquery-1.10.2.js" %}" type="text/javascript"></script>
+	<script src="{% static "/js/bootstrap.min.js" %}" type="text/javascript"></script>
+
+	<!--  Checkbox, Radio & Switch Plugins -->
+	<script src="{% static "/js/bootstrap-checkbox-radio.js" %}"></script>
+
+	<!--  Charts Plugin -->
+	<script src="{% static "/js/chartist.min.js" %}"></script>
+
+    <!--  Notifications Plugin    -->
+    <script src="{% static "/js/bootstrap-notify.js" %}"></script>
+	<!--  地图 -->
+	<script src="{% static "/js/baidumap.js" %}"></script>
+<script language="javascript">
+ 
+/*原生的js写法*/
+var traffictype={{ traffictype }}
+var hotletype={{ hotletype }}
+
+	if (traffictype=='1' && hotletype=='1'){
+        alert("ok")
+	document.getElementById('plan_1_1').style.display='block';//show的display属性设置为block（显示)
+	document.getElementById('plan_1_2').style.display='none';
+	document.getElementById('plan_1_3').style.display='none';	
+	}else if (traffictype=='1' && hotletype=='2'){
+	document.getElementById('plan_1_2').style.display='block';//show的display属性设置为block（显示)
+	document.getElementById('plan_1_1').style.display='none';
+	document.getElementById('plan_1_3').style.display='none';
+	} else {
+	document.getElementById('plan_1_3').style.display='block';//show的display属性设置为block（显示
+	document.getElementById('plan_1_1').style.display='none';
+	document.getElementById('plan_1_2').style.display='none';		
+	}
+	
+		
+
+function showdiv(x){
+	//显示房子
+	if (x=='1'){
+	document.getElementById('plan_2_house').style.display='block';//show的display属性设置为block（显示）
+	document.getElementById('plan_2_plane').style.display='none';//show的display属性设置为block（显示）
+	document.getElementById('plan_2_train').style.display='none';//show的display属性设置为block（显示）
+	}else if (x=="2"){//如果show是显示的
+	document.getElementById('plan_2_house').style.display='none';//show的display属性设置为block（显示）
+	document.getElementById('plan_2_plane').style.display='block';//show的display属性设置为block（显示）
+	document.getElementById('plan_2_train').style.display='none';//show的display属性设置为block（显示）
+	}
+	else {
+	document.getElementById('plan_2_house').style.display='none';//show的display属性设置为block（显示）
+	document.getElementById('plan_2_plane').style.display='none';//show的display属性设置为block（显示）
+	document.getElementById('plan_2_train').style.display='block';//show的display属性设置为block（显示）	
+	}
+	
+	}
+	
+function openWin(win){
+   document.getElementById(win).style.display="";
+}
+function closeWin(win){
+   document.getElementById(win).style.display="none";
+}
+</script>
+  
+
+</html>

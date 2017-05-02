@@ -93,7 +93,8 @@ blockquote small {
   line-height: 1; }
 
 strong {
-  color: #403D39; }
+	color: #333333;
+}
 
 .icon-primary {
   color: #7A9E9F; }
@@ -2217,7 +2218,8 @@ textarea.form-control {
 
 @media (min-width: 992px) {
   .navbar {
-    min-height: 75px; }
+	min-height: 50px;
+}
 
   .navbar-form {
     margin-top: 21px;
@@ -2706,7 +2708,8 @@ textarea.form-control {
     width: 100%; }
 
   .navbar-collapse.collapse {
-    height: 100% !important; }
+	height: 90% !important;
+}
 
   .navbar-collapse.collapse.in {
     display: block; }
@@ -2735,9 +2738,14 @@ textarea.form-control {
     background-color: transparent; }
 
   .footer .copyright {
-	padding: 0px 15px;
 	width: 100%;
 	background-color: #999;
+	overflow: auto;
+	margin-top: 5px;
+	padding-top: 0px;
+	padding-right: 15px;
+	padding-bottom: 0px;
+	padding-left: 15px;
 } }
 @media (min-width: 992px) {
   .table-full-width {

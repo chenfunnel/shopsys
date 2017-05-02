@@ -135,7 +135,7 @@
         <div class="content">
              <div class="plan_frame"> 
                  <div class="plan_main">
-                      <form  method="post" action="">
+                      <form  method="post">
                           {% csrf_token %}
                       <div class="form-group">
                       <table width="97%">
@@ -146,7 +146,7 @@
                           </tr>
                           <tr>
                             <td><input type="text" name="fromcity" class="form-control border-input"  list="url_list" placeholder="北京"></td>
-                            <td><input type="checkbox" name="ifback" style="zoom:75%;" class="form-control border-input" value=""></td>
+                            <td><input type="checkbox" name="ifback" style="zoom:75%;" class="form-control border-input"  value="1"></td>
                             <td><input type="text" name="tocity" id="city_" class="form-control border-input"  list="url_list" placeholder="上海"></td>
                           </tr>
                         </table>
@@ -168,8 +168,8 @@
                           <div class="col_plan_2">
                             <div class="form-group">
                             
-                             <label>目的地址</label>&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/d17.ico" onClick="searchByStationName()" width="30" height="30" >
-                             <img href="assets/css/img/new_logo.png" /> 
+                             <label>目的地址</label>&nbsp;&nbsp;&nbsp;&nbsp;<img src="{% static  "/img/d17.ico" %}" onClick="searchByStationName()" width="30" height="30" >
+                             <img href="{% static  "/img/new_logo.png" %}" />
                                                    
                              <input id="text_" type="text" name="target" class="form-control border-input" placeholder="高新国际" >
                                <input id="result_" type="text" name="targetcoordinate" / hidden="true">
@@ -180,17 +180,17 @@
                             <div class="form-group">
                             <label>交通</label>
                             <br/>
-                              <input type="radio" name="traffictype" id="r1" checked="checked" />飞机
-                              <input type="radio" name="traffictype" id="r2"  /> 高铁
-                              <input type="radio" name="traffictype" id="r3"  /> 普客
+                              <input type="radio" name="traffictype" id="r1" value="1" checked="checked" />飞机
+                              <input type="radio" name="traffictype" id="r2" value="2" /> 高铁
+                              <input type="radio" name="traffictype" id="r3" value="3"  /> 普客
                             </div>
                            </div>
                            <div class="col_plan_1">
                             <div class="form-group">
                             <label>住宿</label>
                             <br/>
-                              <input type="radio" name="hotletype" id="r1" checked="checked" />星级宾馆
-                              <input type="radio" name="hotletype" id="r2"  /> 商务酒店
+                              <input type="radio" name="hotletype" id="r1" value="1" checked="checked" />星级宾馆
+                              <input type="radio" name="hotletype" id="r2" value="2" /> 商务酒店
                             </div>
                            </div>
                           <div class="col_plan_2">
