@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'shopsys.urls'
@@ -145,3 +146,6 @@ MEDIA_URL='/media/'
 SITE_NAME = '前站'
 META_KEYWORDS = '前站, 酒店, 车票, 飞机票, 旅游，特产'
 META_DESCRIPTION = '''前站，你旅游，出差，会议的贴身秘书'''
+
+#用户登录
+LOGIN_URL = '/regist/login/'

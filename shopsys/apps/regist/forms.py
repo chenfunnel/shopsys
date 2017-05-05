@@ -25,6 +25,7 @@ class UserForm(forms.Form):
     username  = forms.CharField(label='用 户 名',max_length=50)
     password1 = forms.CharField(label='密   码',widget=forms.PasswordInput())
     password2 = forms.CharField(label='确认密码',widget=forms.PasswordInput())
+
 #用户登录表单
 class LoginForm(forms.Form):
     username = forms.CharField(label='用户名',max_length=50)

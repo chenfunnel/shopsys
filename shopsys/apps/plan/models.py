@@ -1,4 +1,5 @@
 from django.db import models
+from shopsys.apps.regist.models import Customer
 
 # Create your models here.
 
@@ -17,6 +18,7 @@ class Plan(models.Model):
     is_active=models.IntegerField("计划状态",default=True)
     create_at = models.DateTimeField("创建时间", auto_now_add=True)
     update_at= models.DateTimeField("修改时间", auto_now=True)
+    customer = models.ForeignKey(Customer)
 
 
     class Meta:

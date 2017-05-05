@@ -14,7 +14,7 @@
 	height: 845px;
 }
 .plan_1_1 {
-	height: 220px;
+	height: 120px;
 	border: 1px solid rgb(204,204,204);
 }
 .plan_1_2 {
@@ -167,7 +167,7 @@
 }
 .col_address_1 {
 	width: 40%;
-	float: 1eft;
+	float: left;
 }
 .wrapper .main-panel .content .plan_frame .plan_main form .col_address_2 {
 	width: 10%;

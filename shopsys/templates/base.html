@@ -30,6 +30,13 @@
         <link rel="stylesheet" type="text/css" href="{% static  "css/demo.css" %}"/>
         <link rel="stylesheet" type="text/css" href="{%  static "css/style.css" %}" />
 		<link rel="stylesheet" type="text/css" href="{%  static "css/animate-custom.css" %}" />
+
+        <!--  计划和地图     -->
+        <link href="{% static "/css/plan.css" %}" rel="stylesheet" />
+        <link href="{% static "/css/baidumap.css" %}" rel="stylesheet" />
+        <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.3"></script>
+        <!--  按钮    -->
+        <link href="{% static "/css/button.css" %}" rel="stylesheet" />
 </head>
 <body>
 
@@ -48,6 +55,10 @@
 
     <!--  Notifications Plugin    -->
     <script src="{% static "/js/bootstrap-notify.js" %}"></script>
+
+    <!--  地图 -->
+	<script src="{% static "/js/baidumap.js" %}"></script>
+
 
 </html>
 

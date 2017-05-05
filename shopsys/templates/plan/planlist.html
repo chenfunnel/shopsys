@@ -16,7 +16,7 @@
             </div>
 
             <ul class="nav">
-                <li>
+                 <li>
                     <a href="/plan/plan">
                         <i class="ti-panel"></i>
                         <p>我的行程</p>
@@ -34,13 +34,13 @@
                         <p>用户属性</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="/plan/planlist">
                         <i class="ti-view-list-alt"></i>
                         <p>行程列表</p>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="/regist/contact">
                         <i class="ti-text"></i>
                         <p>联系人</p>
@@ -63,59 +63,65 @@
     </div>
 {% endblock %}
 {% block content %}
-        <div class="content">
+          <div class="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
-
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-striped">
                                     <thead>
                                         <th>ID</th>
-                                    	<th>姓名</th>
-                                    	<th>身份证号</th>
-                                    	<th>手机</th>
-                                    	<th>微信号</th>
-                                        <th>年龄</th>
-                                        <th>性别</th>
+                                    	<th>计划名称</th>
+                                    	<th>出发城市</th>
+                                    	<th>目的城市</th>
+                                    	<th>出发日期</th>
+                                        <th>到达日期</th>
+                                        <th>交通方式</th>
+                                        <th>宾馆类型</th>
+                                        <th>是否往返</th>
+
                                     </thead>
 
                                     <tbody>
-                                     {% for line in contacts %}
+                                     {% for line in plans %}
                                         <tr>
                                         	<td>{{ line.id }}</td>
                                         	<td>{{ line.name }}</td>
-                                        	<td>{{ line.cardid }}</td>
-                                        	<td>{{ line.telephone }}</td>
-                                        	<td>{{ line.weixin }}</td>
-                                            <td>{{ line.age }}</td>
-                                        	<td>{{ line.sex}}</td>
-
+                                        	<td>{{ line.fromcity }}</td>
+                                        	<td>{{ line.tocity }}</td>
+                                        	<td>{{ line.start_at }}</td>
+                                            <td>{{ line.back_at }}</td>
+                                        	<td>{{ line.traffictype}}</td>
+                                        	<td>{{ line.hotletype}}</td>
+                                        	<td>{{ line.ifback}}</td>
+                                            <td><a href="/plan/plandetail/?planid= {{ line.id }}">编辑</a></td>
                                         </tr>
                                      {% endfor %}
                                     </tbody>
                                 </table>
+
                             </div>
                         </div>
                     </div>
 
-                </div>
+               </div>
             </div>
         </div>
-<div class="pagination">
+    <div class="pagination">
     <span class="step-links">
-        {% if contacts.has_previous %}
-            <a href="?page={{ contacts.previous_page_number }}">上一页</a>
+        {% if plans.has_previous %}
+            <a href="?page={{ plans.previous_page_number }}">上一页</a>
         {% endif %}
 
         <span class="current">
-            第 {{ contacts.number }} 页，共 {{ contacts.paginator.num_pages }}页.
+            第 {{ plans.number }} 页，共 {{ plans.paginator.num_pages }}页.
         </span>
 
-        {% if contacts.has_next %}
-            <a href="?page={{ contacts.next_page_number }}">下一页</a>
+        {% if plans.has_next %}
+            <a href="?page={{ plans.next_page_number }}">下一页</a>
         {% endif %}
     </span>
 </div>
+
  {% endblock %}

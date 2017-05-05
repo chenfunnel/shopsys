@@ -17,6 +17,7 @@ Including another URLconf
 from django.conf.urls import  url
 from shopsys.apps.regist import  views
 
+
 # urlpatterns=[
 #     url(r'^$',views.index,{'template_name':'catalog/index.html'},'catalog_home'),
 #     url(r'^category/(?P<category_slug>[-\w]+)/$',views.show_category,{'template_name':'catalog/category.html'},'catalog_category'),
@@ -31,6 +32,5 @@ urlpatterns = [
     url(r'^maps/$', views.maps,name='map'),
     url(r'^contact/$', views.contact,name='contact'),
     url(r'^notification/$', views.notificaiton,name='notification'),
-    url(r'^table/$', views.table,name='table'),
-    url(r'^logout/$', views.logout,name='logout'),
+    url(r'^logout/$', views.logout_view,name='logout'),
 ]

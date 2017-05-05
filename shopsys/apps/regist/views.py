@@ -1,7 +1,12 @@
 from django.shortcuts import render,get_object_or_404
 from .forms import  CustomerForm,UserForm,LoginForm
 from django.http import HttpRequest,HttpResponse,HttpResponseRedirect
-from shopsys.apps.regist.models import Customer
+from shopsys.apps.regist.models import Customer,Contact
+from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
+from django.contrib.auth.models import User
+from django.contrib import auth
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -29,6 +34,7 @@ def regist(request):
             username = uf.cleaned_data['username']
             password1 = uf.cleaned_data['password1']
             password2 = uf.cleaned_data['password2']
+            email='first@a.com'
             errors=[]
             #判断密码是否一致
             if password1==password2 :
@@ -37,20 +43,23 @@ def regist(request):
                 errors.append("两次输入的密码不一致!")
                 return render(request, 'regist/regist.html', locals())
             #try:
-            registJudge = Customer.objects.filter(loginname = username)
-            if len(registJudge)>0 :
-                errors.append("该用户已存在，请重新填写")
-                return render(request,'regist/regist.html',locals())
-            #except :
-            if not errors:
-                registAdd = Customer.objects.create(name=name,loginname=username,password=password)
-                return render (request,'regist/regist.html',locals())
+            # registJudge = Customer.objects.filter(loginname = username)
+            # if len(registJudge)>0 :
+            #     errors.append("该用户已存在，请重新填写")
+            #     return render(request,'regist/regist.html',locals())
+            # #except :
+            # if not errors:
+            #     registAdd = Customer.objects.create(name=name,loginname=username,password=password)
+            user=User.objects.create_user(username,email,password)
+            response = HttpResponseRedirect('/regist/')
+            return response
+
 
     else:
         uf = UserForm()
     return render (request,'regist/regist.html',locals())
-
-
+#切换到Django默认的认证方式
+#
 def login(request):
     # # 如果已登录
     # if len(request.session['username']) >0 :
@@ -63,37 +72,38 @@ def login(request):
             username = uf.cleaned_data['username']
             password = uf.cleaned_data['password']
             #对比输入的用户名和密码和数据库中是否一致
-            userPassJudge = Customer.objects.filter(loginname=username,password=password)
+            user = auth.authenticate(username=username, password=password)
+            if user is not None:
+                auth.login(request, user)
+                user_list = User.objects.get(username=username)
 
-            if userPassJudge:
+            #if userPassJudge:
                 request.session['username'] = username
+                request.session['userid']=user_list.id
                 response = HttpResponseRedirect('/regist/')
-
                 return response
             else:
-                return HttpResponse('/regist/login')
+                return render(request, 'regist/login.html', locals())
     else:
         uf = LoginForm()
     return render(request,'regist/login.html',locals())
-
 
 
 def index(request):
     username = request.session.get('username', default=None)
     return render(request,'regist/dashboard.html',locals())
 
-def logout(request):
+@login_required
+def logout_view(request):
+    logout(request)
+    #del request.session['username']
+    #del request.session['userid']
     response = HttpResponseRedirect('/regist/')
-    del request.session['username']
     return  response
 
 def user(request):
     username = request.session.get('username', default=None)
     return render(request,'regist/user.html',locals())
-
-def table(request):
-    username = request.session.get('username', default=None)
-    return render(request,'regist/table.html',locals())
 
 def maps(request):
     username = request.session.get('username', default=None)
@@ -103,6 +113,19 @@ def notificaiton(request):
     username = request.session.get('username', default=None)
     return render(request,'regist/notifications.html',locals())
 
+@login_required
 def contact(request):
     username = request.session.get('username', default=None)
+    customerid = request.session.get('userid', default=None)
+    contact_list = Contact.objects.filter(customer_id=1).order_by("-id")
+    paginator = Paginator(contact_list, 6)
+    page = request.GET.get('page')
+    try:
+        contacts = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        contacts = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        contacts = paginator.page(paginator.num_pages)
     return render(request,'regist/contact.html',locals())

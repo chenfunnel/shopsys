@@ -21,4 +21,5 @@ from shopsys.apps.plan import  views
 urlpatterns = [
     url(r'^plan/$', views.plan,name='plan'),
     url(r'^planlist/$', views.planlist,name='planlist'),
+    url(r'^plandetail/$', views.plandetail,name='plandetail'),
 ]
