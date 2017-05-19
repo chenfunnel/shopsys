@@ -56,10 +56,7 @@
                                 <form  method="post">
                                      {% csrf_token %}
                                     <h1> 注册 </h1>
-                                    <p>
-                                        <label for="usernamesignup" class="uname" data-icon="u">姓名</label>
-                                        <input id="usernamesignup" name="name" required="required" type="text" placeholder="mysuperusername690" />
-                                    </p>
+
                                     <p>
                                         <label for="emailsignup" class="uname" data-icon="u" > 用户名</label>
                                         <input id="loginname" name="username" required="required" type="text" placeholder="myusername"/>
@@ -71,6 +68,10 @@
                                     <p>
                                         <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">确认密码</label>
                                         <input id="passwordsignup_confirm" name="password2" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                                    </p>
+                                     <p>
+                                        <label for="usernamesignup" class="uname" data-icon="u">邮箱</label>
+                                        <input id="usernamesignup" name="email" required="required" type="email" placeholder="admin@163.com" />
                                     </p>
                                     <p class="signin button">
                                         <input type="submit" value="提交"/>

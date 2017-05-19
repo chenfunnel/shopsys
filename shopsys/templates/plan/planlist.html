@@ -90,11 +90,11 @@
                                         	<td>{{ line.name }}</td>
                                         	<td>{{ line.fromcity }}</td>
                                         	<td>{{ line.tocity }}</td>
-                                        	<td>{{ line.start_at }}</td>
-                                            <td>{{ line.back_at }}</td>
-                                        	<td>{{ line.traffictype}}</td>
-                                        	<td>{{ line.hotletype}}</td>
-                                        	<td>{{ line.ifback}}</td>
+                                        	<td>{{ line.start_at|date:"Y-m-d" }}</td>
+                                            <td>{{ line.back_at|date:"Y-m-d"  }}</td>
+                                        	<td>{{ line.get_traffictype_display}}</td>
+                                        	<td>{{ line.get_hotletype_display}}</td>
+                                        	<td>{{ line.get_ifback_display}}</td>
                                             <td><a href="/plan/plandetail/?planid= {{ line.id }}">编辑</a></td>
                                         </tr>
                                      {% endfor %}

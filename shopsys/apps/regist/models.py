@@ -32,12 +32,12 @@ class Contact(models.Model):
     telephone = models.CharField("手机", max_length=30)
     weixin = models.CharField("微信号", max_length=50)
     age=models.IntegerField("年龄")
-    sex=models.BooleanField("性别",max_length=1,choices=((0,'男'),(1,'女'),))
+    sex=models.IntegerField("性别",choices=((1,'男'),(0,'女'),))
     description = models.TextField("描述")
     is_active = models.BooleanField("是否有效", default=True)
     create_at = models.DateTimeField("新增时间", auto_now_add=True)
     update_at = models.DateTimeField("修改时间", auto_now=True)
-    customer=models.ForeignKey(Customer)
+    customer=models.ForeignKey(User)
 
     class Meta:
         db_table = 'contact'

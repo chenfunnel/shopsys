@@ -149,3 +149,4 @@ META_DESCRIPTION = '''前站，你旅游，出差，会议的贴身秘书'''
 
 #用户登录
 LOGIN_URL = '/regist/login/'
+APPEND_SLASH=False

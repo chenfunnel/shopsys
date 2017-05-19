@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^user/$', views.user,name='user'),
     url(r'^maps/$', views.maps,name='map'),
     url(r'^contact/$', views.contact,name='contact'),
+    url(r'^contactadd/$',views.contact_add,name='contact_add'),
     url(r'^notification/$', views.notificaiton,name='notification'),
     url(r'^logout/$', views.logout_view,name='logout'),
 ]

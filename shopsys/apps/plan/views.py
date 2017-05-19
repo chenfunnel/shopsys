@@ -1,15 +1,18 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,get_object_or_404
-from shopsys.apps.plan.forms import  PlanForm,PlaneForm,TrainForm,HotelForm
+from shopsys.apps.plan.forms import  PlanForm,PlaneForm,TrainForm,HotelForm,Plan_ContactForm
 from django.http import HttpRequest,HttpResponse,HttpResponseRedirect
-from shopsys.apps.plan.models import Plan
+from shopsys.apps.plan.models import Plan,Plane_plan
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
+from shopsys.apps.regist.models import Contact
 
 
 # Create your views here.
 @login_required
 def plan(request):
     username = request.session.get('username', default=None)
+
+
     Method = request.method
     if Method == 'POST':
         #如果有post提交的动作，就将post中的数据赋值给uf，供该函数使用
@@ -66,5 +69,50 @@ def plandetail(request):
     username = request.session.get('username', default=None)
     customerid = request.session.get('userid', default=None)
     plan=Plan.objects.get(id=planid)
-
+    uf=Plan_ContactForm()
+    Plan_ContactForm.fields['contact'].choices = get_contact(request)
     return render (request,'plan/plan_detail.html',locals())
+
+def get_contact(request):
+    r = [('', '----')]
+    customerid = request.session.get('userid', default=None)
+    contact_list = Contact.objects.filter(customer_id=customerid)
+    for obj in contact_list:
+       r = r + [(obj.id, obj.name)]
+    return r
+
+#飞机列表类
+class Cart_plane(object):
+    def __init__(self, *args, **kwargs):
+        self.items = []
+
+    def add_plan(self,product):
+        self.total_price += product.price
+        for item in self.items:
+              if item.product.id == product.id:
+                  item.quantity += 1
+        return  self.items.append(Plane_plan(product=product,unit_price=product.price,quantity=1))
+
+#显示购物车
+def view_cartplan(request):
+    cart = request.session.get("cart",None)
+    if not cart:
+        cart = Cart_plane()
+        request.session["cart"] = cart
+    return render(request,'plan/plan_detail.html',locals())
+
+#添加到购物车
+def add_to_cart(request,id):
+    product = Plane_plan.objects.get(id = id)
+    cart = request.session.get("cart",None)
+    if not cart:
+        cart = Cart()
+        request.session["cart"] = cart
+        cart.add_product(product)
+        request.session['cart'] = cart
+    return view_cart(request)
+
+#清空购物车
+def clean_cart(request):
+    request.session["cart"] = Cart()
+    return view_cart(request)

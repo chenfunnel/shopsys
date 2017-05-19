@@ -46,9 +46,9 @@
               </tr>
               <tr>
                 <td height="25">出发时间</td>
-                <td><strong>{{ plan.start_at }}</strong></td>
+                <td><strong>{{ plan.start_at|date:"Y-m-d"  }}</strong></td>
                 <td>返回时间</td>
-                <td><strong>{{ plan.back_at }}</strong></td>
+                <td><strong>{{ plan.back_at|date:"Y-m-d"  }}</strong></td>
               </tr>
               <tr>
                 <td height="25">目的地</td>
@@ -56,11 +56,11 @@
                 </tr>
               <tr>
                 <td height="25">交通</td>
-                <td id="traffictype"><strong>{{ plan.traffictype }}</strong></td>
+                <td id="traffictype"><strong>{{ plan.get_traffictype_display }}</strong></td>
                 <td height="25">住宿</td>
-                <td id="hotletype"><strong>{{ plan.hotletype }}</strong></td>
+                <td id="hotletype"><strong>{{ plan.get_hotletype_display }}</strong></td>
                 <td height="25">是否往返</td>
-                <td id="hotletype"><strong>{{ plan.ifback }}</strong></td>
+                <td id="hotletype"><strong>{{ plan.get_ifback_display }}</strong></td>
               </tr>
               <tr>
                 <td height="40">&nbsp;</td>
@@ -92,6 +92,7 @@
                     <td align="center" valign="middle"><input class="button blue round" type="button" value="更多" onclick="showdiv(2)"/></td>
                   </tr>
                	  </table>
+
            </div>
            <div id="plan_1_1_2" class="plan_1_1" style="display:none">
                <table width="100%">
@@ -114,6 +115,7 @@
                     <td align="center" valign="middle"><input class="button blue round" type="button" value="更多" onclick="showdiv(3)"/></td>
                   </tr>
                	  </table>
+
            </div>
            <div id="plan_1_1_3" class="plan_1_1" style="display:none">
                 <table width="100%">
@@ -136,6 +138,7 @@
                     <td align="center" valign="middle"><input class="button blue round" type="button" value="更多" onclick="showdiv(3)"/></td>
                   </tr>
                	  </table>
+
            </div>
            <div id="plan_1_2" class="plan_1_1">
                   <table width="100%" >
@@ -154,6 +157,7 @@
                     <td align="center" valign="middle"><input class="button blue round" type="button" value="更多" onclick="showdiv(1)"/></td>
                   </tr>
                  </table>
+
           </div>
            <div id="plan_1_3_1" class="plan_1_1" style="display:none">
 				<table width="100%">
@@ -176,6 +180,7 @@
                     <td align="center" valign="middle"><input class="button blue round" type="button" value="更多" onclick="showdiv(2)"/></td>
                   </tr>
                	  </table>
+
            </div>
            <div id="plan_1_3_2" class="plan_1_1" style="display:none">
                <table width="100%">
@@ -198,6 +203,7 @@
                     <td align="center" valign="middle"><input class="button blue round" type="button" value="更多" onclick="showdiv(3)"/></td>
                   </tr>
                	  </table>
+
            </div>
            <div id="plan_1_3_3" class="plan_1_1" style="display:none">
                 <table width="100%">
@@ -220,6 +226,7 @@
                     <td align="center" valign="middle"><input class="button blue round" type="button" value="更多" onclick="showdiv(3)"/></td>
                   </tr>
                	  </table>
+
            </div>
            <div id="plan_1_4" class="plan_1_1">
                 <table width="100%">
@@ -398,25 +405,25 @@
  
 /*原生的js写法*/
 var traffictype={{ plan.traffictype }}
-var ifback=Number({{ plan.ifback }})
+var ifback=new  Boolean('{{ plan.ifback }}')
 
 
  alert ('ok')
    if (traffictype=='1'){
         document.getElementById('plan_1_1_1').style.display = 'block';//show的display属性设置为block（显示)
-        if (ifback=='1') {
+        if (ifback) {
             document.getElementById('plan_1_3_1').style.display = 'block';
         }
     }
     if (traffictype=='2'){
         document.getElementById('plan_1_1_2').style.display = 'block';//show的display属性设置为block（显示)
-        if ({{ plan.ifback }} ) {
+        if (ifback) {
             document.getElementById('plan_1_3_2').style.display = 'block';
         }
     }
     if (traffictype=='3' ){
         document.getElementById('plan_1_1_3').style.display = 'block';//show的display属性设置为block（显示)
-        if ({{ plan.ifback }}) {
+        if (ifback) {
             document.getElementById('plan_1_3_3').style.display = 'block';
         }
     }

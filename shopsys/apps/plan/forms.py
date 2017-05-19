@@ -59,3 +59,6 @@ class HotelForm(forms.Form):
     total_time = forms.IntegerField(label="住宿天数")
     description = forms.CharField(label="描述")
     is_active = forms.BooleanField(label="订购状态")
+
+class Plan_ContactForm(forms.Form):
+    contact=forms.ChoiceField(label="乘机人")

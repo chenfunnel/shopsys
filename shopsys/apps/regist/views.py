@@ -1,5 +1,5 @@
 from django.shortcuts import render,get_object_or_404
-from .forms import  CustomerForm,UserForm,LoginForm
+from .forms import  ContactForm,UserForm,LoginForm
 from django.http import HttpRequest,HttpResponse,HttpResponseRedirect
 from shopsys.apps.regist.models import Customer,Contact
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
@@ -29,12 +29,11 @@ def regist(request):
         #如果有post提交的动作，就将post中的数据赋值给uf，供该函数使用
         uf = UserForm(request.POST)
         if uf.is_valid():
-            print(uf.cleaned_data['name'])
-            name=uf.cleaned_data['name']
+
+            email=uf.cleaned_data['email']
             username = uf.cleaned_data['username']
             password1 = uf.cleaned_data['password1']
             password2 = uf.cleaned_data['password2']
-            email='first@a.com'
             errors=[]
             #判断密码是否一致
             if password1==password2 :
@@ -53,19 +52,13 @@ def regist(request):
             user=User.objects.create_user(username,email,password)
             response = HttpResponseRedirect('/regist/')
             return response
-
-
     else:
         uf = UserForm()
     return render (request,'regist/regist.html',locals())
 #切换到Django默认的认证方式
 #
 def login(request):
-    # # 如果已登录
-    # if len(request.session['username']) >0 :
-    #     response = HttpResponseRedirect('/catalog/')
-    #     return response
-    #如果未登录
+
     if request.method == 'POST':
         uf = LoginForm(request.POST)
         if uf.is_valid():
@@ -117,7 +110,7 @@ def notificaiton(request):
 def contact(request):
     username = request.session.get('username', default=None)
     customerid = request.session.get('userid', default=None)
-    contact_list = Contact.objects.filter(customer_id=1).order_by("-id")
+    contact_list = Contact.objects.filter(customer_id=customerid).order_by("-id")
     paginator = Paginator(contact_list, 6)
     page = request.GET.get('page')
     try:
@@ -129,3 +122,33 @@ def contact(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         contacts = paginator.page(paginator.num_pages)
     return render(request,'regist/contact.html',locals())
+
+def contact_add(request):
+
+    Method = request.method
+    if Method == 'POST':
+        # 如果有post提交的动作，就将post中的数据赋值给uf，供该函数使用
+        uf = ContactForm(request.POST)
+
+        if uf.is_valid():
+            name = uf.cleaned_data['name']
+            cardid = uf.cleaned_data['cardid']
+            telephone = uf.cleaned_data['telephone']
+            weixin = uf.cleaned_data['weixin']
+            age = uf.cleaned_data['age']
+            sex = uf.cleaned_data['sex']
+            print(sex)
+            #description = uf.cleaned_data['description']
+            customerid = request.session.get('userid', default=1)
+            errors = []
+            contactAdd = Contact.objects.create(name=name,cardid=cardid,telephone=telephone,weixin=weixin,age=age,sex=sex,customer_id=customerid,is_active=1)
+
+            response = HttpResponseRedirect('/regist/contact/')
+            return response
+        else:
+            errors=uf.errors
+            return render(request, 'regist/contact.html', locals())
+    else:
+        uf = ContactForm()
+    return render(request,'regist/contact.html',locals())
+

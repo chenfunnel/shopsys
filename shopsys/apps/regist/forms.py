@@ -21,7 +21,7 @@ class CustomerForm(forms.ModelForm):
 # Create your views here.
 #用户注册表单
 class UserForm(forms.Form):
-    name  = forms.CharField(label="姓  名",max_length=50)
+    email  = forms.EmailField(label="邮箱",max_length=50)
     username  = forms.CharField(label='用 户 名',max_length=50)
     password1 = forms.CharField(label='密   码',widget=forms.PasswordInput())
     password2 = forms.CharField(label='确认密码',widget=forms.PasswordInput())
@@ -30,4 +30,14 @@ class UserForm(forms.Form):
 class LoginForm(forms.Form):
     username = forms.CharField(label='用户名',max_length=50)
     password = forms.CharField(label='密  码',widget=forms.PasswordInput())
+
+#联系人表单
+class ContactForm(forms.Form):
+    name = forms.CharField(label="姓名", max_length=50)
+    cardid = forms.CharField(label="身份证号", max_length=30)
+    telephone = forms.CharField(label="手机", max_length=30)
+    weixin = forms.CharField(label="微信号", max_length=50)
+    age = forms.IntegerField(label="年龄")
+    sex = forms.IntegerField(label="性别")
+
 
