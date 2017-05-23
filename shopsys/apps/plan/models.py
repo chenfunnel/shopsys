@@ -113,5 +113,62 @@ class Hotel_plan(models.Model):
     def __str__(self):
         return self.name
 
+class Plane(models.Model):
+    name = models.CharField("航班名称", max_length=50)
+    companyname = models.CharField("航空公司", max_length=50)
+    planetype = models.CharField("执行机型", max_length=50)
+    fromcity = models.CharField("起飞站", max_length=30)
+    tocity = models.CharField("落地站", max_length=30)
+    start_at = models.DateTimeField("起飞时间")
+    arrive_at = models.DateTimeField("落地时间")
+    fromstation = models.CharField("起飞机场航站", max_length=50)
+    tostation = models.CharField("落地机场航站", max_length=50)
+    total_time=models.IntegerField("飞行时间")
+    classtype=models.CharField("舱位", max_length=20)
+    price=models.DecimalField("价格",max_digits=9,decimal_places=2,blank=True,default=0.00)
+    description = models.TextField("描述")
 
+    class Meta:
+        db_table = 'plane'
+        verbose_name = '航班列表'
+        verbose_name_plural = verbose_name
 
+    def __str__(self):
+        return self.name
+
+class Train(models.Model):
+    name = models.CharField("车次", max_length=50)
+    traintype = models.CharField("火车类型", max_length=20)
+    fromstation = models.CharField("出发站", max_length=30)
+    tostation = models.CharField("到达站", max_length=30)
+    start_at = models.DateTimeField("发车时间")
+    arrive_at = models.DateTimeField("到站时间")
+    total_time=models.IntegerField("行驶时间")
+    classtype = models.CharField("席别", max_length=20)
+    price=models.DecimalField("价格",max_digits=9,decimal_places=2,blank=True,default=0.00)
+    description = models.TextField("描述")
+
+    class Meta:
+        db_table = 'train'
+        verbose_name = '火车列表'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.name
+
+class Hotel(models.Model):
+    name = models.CharField("宾馆名称", max_length=50)
+    hoteltype = models.CharField("类型", max_length=20)
+    address = models.CharField("地址", max_length=30)
+    coordinate = models.CharField("地址坐标", max_length=60)
+    classtype = models.CharField("房间类型", max_length=20)
+    price=models.DecimalField("价格",max_digits=9,decimal_places=2,blank=True,default=0.00)
+    description = models.TextField("描述")
+
+    class Meta:
+        db_table = 'hotel'
+        verbose_name = '酒店列表'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.name

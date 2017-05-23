@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,get_object_or_404
 from shopsys.apps.plan.forms import  PlanForm,PlaneForm,TrainForm,HotelForm,Plan_ContactForm
 from django.http import HttpRequest,HttpResponse,HttpResponseRedirect
-from shopsys.apps.plan.models import Plan,Plane_plan
+from shopsys.apps.plan.models import Plan,Plane_plan,Hotel_plan,Train_plan,Train,Hotel,Plane
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from shopsys.apps.regist.models import Contact
 
@@ -80,39 +80,120 @@ def get_contact(request):
     for obj in contact_list:
        r = r + [(obj.id, obj.name)]
     return r
+#飞机
 
 #飞机列表类
 class Cart_plane(object):
     def __init__(self, *args, **kwargs):
         self.items = []
 
-    def add_plan(self,product):
-        self.total_price += product.price
-        for item in self.items:
-              if item.product.id == product.id:
-                  item.quantity += 1
-        return  self.items.append(Plane_plan(product=product,unit_price=product.price,quantity=1))
+    def add_plane(self,plan,plane):
+        contact_list=plan.contact.all()
+        for item in contact_list:
+            self.items.append(Plane(id=plane.id, planid=plan.id,contactid=item.customer_id))
+        print (self.items)
+        return  self.items
 
-#显示购物车
-def view_cartplan(request):
-    cart = request.session.get("cart",None)
-    if not cart:
-        cart = Cart_plane()
-        request.session["cart"] = cart
+#显示飞机票购物车
+def view_cartplane(request):
+    cart_plane = request.session.get("cart_plane",None)
+    if not cart_plane:
+        cart_plane = Cart_plane()
+        request.session["cart_plane"] = cart_plane
     return render(request,'plan/plan_detail.html',locals())
 
-#添加到购物车
-def add_to_cart(request,id):
-    product = Plane_plan.objects.get(id = id)
-    cart = request.session.get("cart",None)
+#添加到飞机票购物车
+def add_to_cartplane(request,id):
+    plane = Plane.objects.get(id = id)
+    planid = request.GET.get('planid')
+    plan= Plan.objects.get(id=planid)
+    cart = request.session.get("cart_plane",None)
     if not cart:
-        cart = Cart()
-        request.session["cart"] = cart
-        cart.add_product(product)
-        request.session['cart'] = cart
-    return view_cart(request)
+        cart = Cart_plane()
+        request.session["cart_plane"] = cart
+        cart.add_plane(plane,plan)
+        request.session['cart_plane'] = cart
+    return view_cartplane(request)
 
-#清空购物车
-def clean_cart(request):
-    request.session["cart"] = Cart()
-    return view_cart(request)
+#清空飞机票购物车
+def clean_cartplane(request):
+    request.session["cart_plane"] = Cart_plane()
+    return view_cartplane(request)
+
+#火车
+#火车列表类
+class Cart_train(object):
+    def __init__(self, *args, **kwargs):
+        self.items = []
+
+    def add_train(self,plan,train):
+        contact_list=plan.contact.all()
+        for item in contact_list:
+            self.items.append(Train(id=train.id, planid=plan.id,contactid=item.customer_id))
+        print (self.items)
+        return  self.items
+
+#显示火车票购物车
+def view_carttrain(request):
+    cart_train = request.session.get("cart_train",None)
+    if not cart_train:
+        cart_train = Cart_train()
+        request.session["cart_train"] = cart_train
+    return render(request,'plan/plan_detail.html',locals())
+
+#添加到火车票购物车
+def add_to_carttrain(request,id):
+    train = Train.objects.get(id = id)
+    planid = request.GET.get('planid')
+    plan = Plan.objects.get(id=planid)
+    cart = request.session.get("cart_train",None)
+    if not cart:
+        cart = Cart_train()
+        request.session["cart_train"] = cart
+        cart.add_train(train,plan)
+        request.session['cart_train'] = cart
+    return view_carttrain(request)
+
+#清空火车票购物车
+def clean_carttrain(request):
+    request.session["cart_train"] = Cart_train()
+    return view_carttrain(request)
+
+#宾馆
+#宾馆列表类
+class Cart_hotel(object):
+    def __init__(self, *args, **kwargs):
+        self.items = []
+
+    def add_hotel(self,plan,hotel):
+        contact_list=plan.contact.all()
+        for item in contact_list:
+            self.items.append(Hotel(id=hotel.id, planid=plan.id,contactid=item.customer_id))
+        print (self.items)
+        return  self.items
+
+#显示宾馆购物车
+def view_carthotel(request):
+    cart_hotel = request.session.get("cart_hotel",None)
+    if not cart_hotel:
+        cart_hotel = Cart_hotel()
+        request.session["cart_hotel"] = cart_hotel
+    return render(request,'plan/plan_detail.html',locals())
+
+#添加到宾馆购物车
+def add_to_carthotel(request,id):
+    hotel = Hotel.objects.get(id = id)
+    planid = request.GET.get('planid')
+    plan = Plan.objects.get(id=planid)
+    cart = request.session.get("cart_hotel",None)
+    if not cart:
+        cart = Cart_hotel()
+        request.session["cart_hotel"] = cart
+        cart.add_hotel(hotel,plan)
+        request.session['cart_hotel'] = cart
+    return view_carthotel(request)
+
+#清空宾馆购物车
+def clean_carthotel(request):
+    request.session["cart_hotel"] = Cart_hotel()
+    return view_carthotel(request)
