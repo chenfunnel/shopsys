@@ -69,6 +69,11 @@ def plandetail(request):
     username = request.session.get('username', default=None)
     customerid = request.session.get('userid', default=None)
     plan=Plan.objects.get(id=planid)
+    fromcity=plan.fromcity
+    tocity=plan.tocity
+    plane=Plane.objects.filter(fromcity=fromcity, tocity=tocity)
+    train=Train.objects.filter(fromstation=fromcity,tostation=tocity)
+    hotel=Hotel.objects.filter(city=tocity)
     uf=Plan_ContactForm()
     Plan_ContactForm.fields['contact'].choices = get_contact(request)
     return render (request,'plan/plan_detail.html',locals())
@@ -100,7 +105,7 @@ def view_cartplane(request):
     if not cart_plane:
         cart_plane = Cart_plane()
         request.session["cart_plane"] = cart_plane
-    return render(request,'plan/plan_detail.html',locals())
+    return render(request,'plan/plan_detail_2.html',locals())
 
 #添加到飞机票购物车
 def add_to_cartplane(request,id):

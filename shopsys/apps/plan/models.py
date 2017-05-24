@@ -158,6 +158,7 @@ class Train(models.Model):
 
 class Hotel(models.Model):
     name = models.CharField("宾馆名称", max_length=50)
+    city=models.CharField("城市",max_length=40)
     hoteltype = models.CharField("类型", max_length=20)
     address = models.CharField("地址", max_length=30)
     coordinate = models.CharField("地址坐标", max_length=60)
