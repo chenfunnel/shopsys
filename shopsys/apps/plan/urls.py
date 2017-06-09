@@ -22,4 +22,10 @@ urlpatterns = [
     url(r'^plan/$', views.plan,name='plan'),
     url(r'^planlist/$', views.planlist,name='planlist'),
     url(r'^plandetail/$', views.plandetail,name='plandetail'),
+    url(r'^contactlist/$',views.contactlist.as_view(),name='contactlist'),
+    url(r'^contactdetail/(?P<pk>[0-9]+)$',views.contact_detail,name='contactdetail'),
+    url(r'^planelist/$', views.PlaneList.as_view(),name='planelist'),
+    url(r'^trainlist/$', views.TrainList.as_view(),name='trainlist'),
+    url(r'^hotellist/$', views.HotelList.as_view(),name='hotellist'),
+    url(r'^plancontact/$', views.contactview.as_view(),name='plancontact'),
 ]

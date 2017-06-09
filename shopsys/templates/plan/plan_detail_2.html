@@ -55,65 +55,50 @@
                 <td colspan="3"><strong>{{ plan.target }}</strong></td>
                 </tr>             
               <tr>
-                <td height="40">&nbsp;</td>
-                <td align="center" valign="middle"><input class="button blue round" type="button" value="飞机" onclick="showdiv(2)"/></td>
-                <td align="center" valign="middle"><input class="button blue round" type="button" value="火车" onclick="showdiv(3)"/></td>
-                <td align="center" valign="middle"><input class="button blue round" type="button" value="宾馆" onclick="showdiv(1)"/></td>
-                <td align="center" valign="middle"><input class="button blue round" type="button" value="确认" onclick=""/></td>
-                <td>&nbsp;</td>
+                <td height="40" colspan="4" align="center"><input class="button blue round" type="button" value="确认" onclick=""/></td>
               </tr>
            </table>
      
-          </div>  
-          <div id="plan_1_1_1" class="plan_1_1" style="display:none">
-				<table width="100%">
-                 {% for item in cart_plane.items %}
-                  <tr>
-                    <td>飞机</td>
-                    <td width="24%">
-                    <span>{{ item.id  }} /span><br>
-                     <span>{{  item.id  }}</span>
-                     </td>
-                    <td width="17%" align="center">
-                    <span style="font-size: 18px; font; font-weight: bolder;">{{ item.id  }}</span><br>    <span>{{ item.id  }}</span>
-                    </td>
-                  </tr>
-                  {% endfor  %}
-               	  </table>
-
-           </div>
-           <div id="plan_1_1_2" class="plan_1_1" style="display:none">
-               <table width="100%">
-                  {% for item in cart_train.items %}
-                  <tr>
-                    <td>火车</td>
-                    <td width="24%">
-                     <span>{{ item.id  }}</span><br>
-                     <span>{{ item.id  }}</span>
-                     </td>
-                    <td width="17%" align="center">
-                    <span style="font-size: 18px; font; font-weight: bolder;">{{ item.id  }}</span><br>    <span>{{ item.id  }}</span>
-                    </td>
-                  </tr>
-                   {% endfor %}
-               	  </table>
-
-           </div>
-           <div id="plan_1_2" class="plan_1_1">
-                  <table width="100%" >
-                  {% for item in cart_hotel.items %}
-                  <tr>
-                    <td width="24%"><img src="{% static "/img/timg.jpg" %}"  width="150" height="100" onClick="openWin('plan_house_select')">
-                     </td>
-                    <td width="30%" align="center">
-                    <span style="font-size: 14px; font; font-weight: bolder;" onClick="openWin('plan_house_select')">{{ item.id  }}</span><br>
-                    <span>{{ item.id  }}</span>
-                    </td>
-                  </tr>
-                  {%  endfor %}
-                 </table>
-
           </div>
+           <div id="plan_customer" class="plan_1_1">
+			 <table id="customerhead" width="100%" border="0" cellpadding="2">
+              <tr>
+                <td width="71%"><img src="{% static "/img/乘客.png" %}" width="34" height="35" /></td>
+                <td width="15%" align="center"><a class="btn-customer">选择</a></td>
+                <td width="14%">&nbsp;</td>
+              </tr>
+             </table>
+         </div>
+          <div id="plan_plane" class="plan_1_1" >
+				<table width="100%" border="0" cellpadding="2">
+  <tr>
+    <td width="71%"><img src="{% static "/img/plane.png" %}" width="34" height="35" /></td>
+    <td width="15%" align="center"><a class="btn-plane">选择</a></td>
+    <td width="14%" align="center">展开</td>
+  </tr>
+</table>
+
+         </div>
+           <div id="plan_train" class="plan_1_1" >
+               <table width="100%" border="0" cellpadding="2">
+  <tr>
+    <td width="71%"><img src="{% static "/img/火车.png" %}" width="34" height="35" /></td>
+    <td width="15%" align="center"><a class="btn-train">选择</a></td>
+    <td width="14%" align="center">展开</td>
+  </tr>
+</table>
+
+         </div>
+           <div id="plan_hotel" class="plan_1_1">
+              <table width="100%" border="0" cellpadding="2">
+  <tr>
+    <td width="71%"><img src="{% static "/img/酒店.png" %}" width="34" height="35" /></td>
+    <td width="15%" align="center"><a class="btn-hotel">选择</a></td>
+    <td width="14%" align="center">展开</td>
+  </tr>
+</table>
+
+         </div>
            <div id="plan_1_4" class="plan_1_1">
                 <table width="100%">
                   <tr>
@@ -126,226 +111,145 @@
           
   </div>
 
-      <div id="plan_2_train" class="plan_2" style="display:none">
-                <table width="100%">
-                  <tr>
-                    <th width="24%">车次</th>
-                    <th width="17%">开车时间</th>
-                    <th width="20"></th>
-                    <th width="13%">到达时间</th>
-                    <th width="10%">席次</th>
-                    <th width="15%">价格</th>
-                    <th width="9%"></th>
-                  </tr>
-                </table>
-
-      			<table width="100%">
-                  {% for item in train %}
-                  <tr>
-                    <td width="24%" height="84">
-                    <span>{{ item.id  }}</span><br>
-                     <span>{{ item.id  }}</span>
-                     </td>
-                    <td width="17%" align="center">
-                    <span style="font-size: 18px; font; font-weight: bolder;">{{ item.id  }}</span><br>    <span>{{ item.id  }}</span>
-                    </td>
-                    <td width="9%" align="center">----></td>
-                    <td width="18%" align="center">
-                    <span style="font-size: 18px; font; font-weight: bolder;">{{ item.id  }}</span><br>
-                     <span>{{ item.id  }}</span>
-                    </td>
-                    <td>{{ item.id  }}</td>
-                    <td align="right" >￥<font color="red" size="+2" >{{ item.id  }}</font></td>
-                    <td align="center" valign="middle"><input class="button red round" type="button" value="预定" onclick=""/></td>
-                  </tr>
-                  {% endfor %}
-               	  </table>
+      <div id="plan_2" class="plan_2">
+          <div id="select">
+          </div>
 
       </div>    
-            <div id="plan_2_plane" class="plan_2" style="display:none">
-                <table width="100%">
-                  <tr>
-                    <th width="24%">航班</th>
-                    <th width="17%">起飞时间</th>
-                    <th width="20"></th>
-                    <th width="13%">落地时间</th>
-                    <th width="10%">舱位</th>
-                    <th width="15%">价格</th>
-                    <th width="9%"></th>
-                  </tr>
-                </table>
-                <table width="100%">
-                  {% for item in plane %}
-                  <tr>
-                    <td width="24%" height="80">
-                    <span>{{ item.id  }}</span><br>
-                     <span>{{ item.id  }}</span>
-                     </td>
-                    <td width="17%" align="center">
-                    <span style="font-size: 18px; font; font-weight: bolder;">{{ item.id  }}</span><br>    <span>{{ item.id  }}</span>
-                    </td>
-                    <td width="9%" align="center">----></td>
-                    <td width="18%" align="center">
-                    <span style="font-size: 18px; font; font-weight: bolder;">{{ item.id  }}</span><br>
-                     <span>{{ item.id  }}</span>
-                    </td>
-                    <td>{{ item.id  }}</td>
-                    <td align="right" >￥<font color="red" size="+2" >{{ item.id  }}</font></td>
-                    <td align="center" valign="middle"><input class="button red round" type="button" value="预定" onclick=""/></td>
-                  </tr>
-                   {% endfor %}
-               	  </table>
 
-      </div>    
-      	<div id="plan_2_house" class="plan_2">
-                <table width="100%">
-                  <tr>
-                    <th width="24%"></th>
-                    <th width="17%">宾馆名称</th>
-                    <th width="20"></th>
-                    <th width="13%">类型</th>
-                    <th width="10%">房型</th>
-                    <th width="15%">价格</th>
-                    <th width="9%"></th>
-                  </tr>
-                </table>
-                <table width="100%" >
-                   {% for item in hotel %}
-                  <tr>
-                     <td width="20%" height="130"><img src="{% static "/img/timg.jpg" %}" width="150" height="100">
-                     </td>
-                    <td width="30%" align="center">
-                    <span style="font-size: 14px; font; font-weight: bolder;">{{ item.id  }}</span><br>
-                    <span>{{ item.id  }}</span>
-                    </td>
-                    <td width="9%" align="center">{{ item.id  }}</td>
-                    <td align="center">{{ item.id  }}</td>
-                    <td  align="center">
-                    </td>
-                    <td align="right" >￥<font color="red" size="+2" >{{ item.id  }}</font></td>
-                    <td align="center" valign="middle"><input class="button red round" type="button" value="预定" onclick=""/></td>
-                  </tr>
-                  {% endfor %}
-                 </table>
-
-        </div>
 
 </div>
 
 <div class="plan_detail_foot">                
              &copy; <script>document.write(new Date().getFullYear())</script>, 制作单位：西安前站信息技术有限公司
 </div>
-<div id=plan_house_select style="display: none; POSITION: absolute; left: 50%; top: 50%; width: 700px; height: 500px; margin-left: -300px; margin-top: -200px; border: 1px solid #888; background-color: #FFF; padding-left: 10px; padding-right: 10px;">
-        <img src="{% static "/img/5-140FG95152.png" %}" width="50" height="30" onClick="closeWin('plan_house_select')" style="position:absolute; right:10px; top:5px; "><br>
-				<table width="100%">
-      			 <tr>
-                  	<th width="10%"></th>
-                    <th width="24%">房型</th>
-                    <th width="17%">床型</th>
-                    <th width="20%">早餐</th>
-                    <th width="13%">配套</th>
-                    <th width="15%">价格</th>
-                    <th width="9%"></th>
-                  </tr>
-                </table>
-                <table width="100%" >
-                  <tr>
-                     <td width="20%" height="130"><img src="{% static "/img/bigbed.jpg" %}" width="150" height="100">
-                     </td>
-                    <td width="30%" align="center">
-                    商务大床房
-                    </td>
-                    <td width="9%" align="center">大床</td>
-                    <td align="center">双早</td>
-                    <td  align="center">免费wifi</td>
-                    <td align="right" >￥<font color="red" size="+2" >300</font></td>
-                    <td align="center" valign="middle"><input class="button red round" type="button" value="预定" onclick=""/></td>
-                  </tr>
-                 </table>
-                 <table width="100%" >
-                  <tr>
-                     <td width="20%" height="130"><img src="{% static "/img/doublebed.jpg" %}" width="150" height="100">
-                     </td>
-                    <td width="30%" align="center">
-                    标间
-                    </td>
-                    <td width="9%" align="center">大床</td>
-                    <td align="center">双早</td>
-                    <td  align="center">免费wifi</td>
-                    <td align="right" >￥<font color="red" size="+2" >280</font></td>
-                    <td align="center" valign="middle"><input class="button red round" type="button" value="预定" onclick=""/></td>
-                  </tr>
-                 </table>
-                 <table width="100%" >
-                  <tr>
-                     <td width="20%" height="130"><img src="{% static "/img/haohua.jpg"%}" width="150" height="100">
-                     </td>
-                    <td width="30%" align="center">
-                    豪华大床房
-                    </td>
-                    <td width="9%" align="center">大床</td>
-                    <td align="center">双早</td>
-                    <td  align="center">免费wifi</td>
-                    <td align="right" >￥<font color="red" size="+2" >500</font></td>
-                    <td align="center" valign="middle"><input class="button red round" type="button" value="预定" onclick=""/></td>
-                  </tr>
-                 </table>
-               </div>
-
+<div id=plan_select style="display: none; POSITION: absolute; left: 50%; top: 50%; width: 700px; height: 500px; margin-left: -300px; margin-top: -200px; border: 1px solid #888; background-color: #FFF; padding-left: 10px; padding-right: 10px;">
+        详细选择
+</div>
 
 <script language="javascript">
- 
-/*原生的js写法*/
-var traffictype={{ plan.traffictype }}
-var ifback=new  Boolean('{{ plan.ifback }}')
 
-
- alert ('ok')
-   if (traffictype=='1'){
-        document.getElementById('plan_1_1_1').style.display = 'block';//show的display属性设置为block（显示)
-        if (ifback) {
-            document.getElementById('plan_1_3_1').style.display = 'block';
-        }
-    }
-    if (traffictype=='2'){
-        document.getElementById('plan_1_1_2').style.display = 'block';//show的display属性设置为block（显示)
-        if (ifback) {
-            document.getElementById('plan_1_3_2').style.display = 'block';
-        }
-    }
-    if (traffictype=='3' ){
-        document.getElementById('plan_1_1_3').style.display = 'block';//show的display属性设置为block（显示)
-        if (ifback) {
-            document.getElementById('plan_1_3_3').style.display = 'block';
-        }
-    }
-
-
-function showdiv(x){
-	//显示房子
-	if (x=='1'){
-	document.getElementById('plan_2_house').style.display='block';//show的display属性设置为block（显示）
-	document.getElementById('plan_2_plane').style.display='none';//show的display属性设置为block（显示）
-	document.getElementById('plan_2_train').style.display='none';//show的display属性设置为block（显示）
-	}else if (x=="2"){//如果show是显示的
-	document.getElementById('plan_2_house').style.display='none';//show的display属性设置为block（显示）
-	document.getElementById('plan_2_plane').style.display='block';//show的display属性设置为block（显示）
-	document.getElementById('plan_2_train').style.display='none';//show的display属性设置为block（显示）
-	}
-	else {
-	document.getElementById('plan_2_house').style.display='none';//show的display属性设置为block（显示）
-	document.getElementById('plan_2_plane').style.display='none';//show的display属性设置为block（显示）
-	document.getElementById('plan_2_train').style.display='block';//show的display属性设置为block（显示）	
-	}
-	
-	}
-	
 function openWin(win){
    document.getElementById(win).style.display="";
 }
 function closeWin(win){
    document.getElementById(win).style.display="none";
 }
+
+$('.btn-customer').click(function () {
+    $.ajax({
+        type:"GET",
+        url:"/plan/contactlist/",
+        dataType:"json",
+        success:function (data) {
+            var tablehtml="<table class='table table-bordered table-hover'  ><tr class='success'><th >选择</th><th >编号</th><th>名称</th></tr>"
+            json_str=JSON.stringify(data)
+            json_data=JSON.parse(json_str)
+            //alert(json_data)
+            for (var i in json_data) {
+                item=json_data[i]
+                tablehtml+=('<tr><td width="80px"><input type="checkbox" name="customerchk" value="' + item.id+ '"></td><td width="100px">' + item.id + '</td><td width="100px">' + item.name+'</td></tr>' )
+            }
+            tablehtml+='</table><button class="save_customesel">保存</button>'
+            $("#select").empty() ;
+            $("#select").append(tablehtml)
+        }
+    })
+})
+$.ajaxSetup({
+　　data: {csrfmiddlewaretoken: '{{ csrf_token }}' },
+});
+$('#select').on("click",".save_customesel",function () {
+    var planid='{{ planid }}'
+    var contactsel = [];
+    $("input[name='customerchk']:checked").each(function () {
+        contactsel.push($(this).val());
+    });
+    $.ajax({
+        type: "POST",
+        url: "/plan/contactlist/",
+        traditional :true,
+        data:{"chk":contactsel,"planid":planid},
+        dataType: "json",
+        success: function (data) {
+            var tablehtml = "<table id='contacttab' class='table table-bordered table-hover' border='1' bordercolor='#ccc'><tr><th >编号</th><th>姓名</th></tr>"
+            json_str = JSON.stringify(data)
+            json_data = JSON.parse(json_str)
+            //alert(json_data)
+            for (var i in json_data) {
+                item = json_data[i]
+                tablehtml += ('<tr><td width="100px">' + item.id + '</td><td width="100px">' + item.name + '</td></tr>' )
+            }
+            tablehtml += '</table>'
+            //alert(tablehtml)
+            $("#contacttab").remove();
+            $("#customerhead").after(tablehtml)
+        }
+    })
+})
+
+$('.btn-plane').click(function () {
+    $.ajax({
+        type:"GET",
+        url:"/plan/planelist/",
+        dataType:"json",
+        success:function (data) {
+            var tablehtml="<table class='table table-bordered table-hover' border='1' bordercolor='#ccc'><tr><th >选择</th><th >编号</th><th>航班</th></tr>"
+            json_str=JSON.stringify(data)
+            json_data=JSON.parse(json_str)
+            //alert(json_data)
+            for (var i in json_data) {
+                item=json_data[i]
+                tablehtml+=('<tr><td width="80px"><input type="checkbox" name="customersel" value="' + item.id+ '"></td><td width="100px">' + item.id + '</td><td width="100px">' + item.name+'</td></tr>' )
+            }
+            tablehtml+='</table><button class="save_customesel">保存</button>'
+            $("#select").empty() ;
+            $("#select").append(tablehtml)
+        }
+    })
+})
+
+$('.btn-train').click(function () {
+    $.ajax({
+        type:"GET",
+        url:"/plan/trainlist/",
+        dataType:"json",
+        success:function (data) {
+            var tablehtml="<table class='table table-bordered table-hover' border='1' bordercolor='#ccc'><tr><th >选择</th><th >编号</th><th>车次</th></tr>"
+            json_str=JSON.stringify(data)
+            json_data=JSON.parse(json_str)
+            //alert(json_data)
+            for (var i in json_data) {
+                item=json_data[i]
+                tablehtml+=('<tr><td width="80px"><input type="checkbox" name="customersel" value="' + item.id+ '"></td><td width="100px">' + item.id + '</td><td width="100px">' + item.name+'</td></tr>' )
+            }
+            tablehtml+='</table><button class="save_customesel">保存</button>'
+            $("#select").empty() ;
+            $("#select").append(tablehtml)
+        }
+    })
+})
+
+$('.btn-hotel').click(function () {
+    $.ajax({
+        type:"GET",
+        url:"/plan/hotellist/",
+        dataType:"json",
+        success:function (data) {
+            var tablehtml="<table class='table table-bordered table-hover' border='1' bordercolor='#ccc'><tr><th >选择</th><th >编号</th><th>酒店</th></tr>"
+            json_str=JSON.stringify(data)
+            json_data=JSON.parse(json_str)
+            //alert(json_data)
+            for (var i in json_data) {
+                item=json_data[i]
+                tablehtml+=('<tr><td width="80px"><input type="checkbox" name="customersel" value="' + item.id+ '"></td><td width="100px">' + item.id + '</td><td width="100px">' + item.name+'</td></tr>' )
+            }
+            tablehtml+='</table><button class="save_customesel">保存</button>'
+            $("#select").empty() ;
+            $("#select").append(tablehtml)
+        }
+    })
+})
 </script>
-  {% endblock %}
+{% endblock %}
 

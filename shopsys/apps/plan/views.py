@@ -1,11 +1,17 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,get_object_or_404
 from shopsys.apps.plan.forms import  PlanForm,PlaneForm,TrainForm,HotelForm,Plan_ContactForm
-from django.http import HttpRequest,HttpResponse,HttpResponseRedirect
+from django.http import HttpRequest,HttpResponse,HttpResponseRedirect,JsonResponse
 from shopsys.apps.plan.models import Plan,Plane_plan,Hotel_plan,Train_plan,Train,Hotel,Plane
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from shopsys.apps.regist.models import Contact
-
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from shopsys.apps.plan.resource import planserializer,trainserializer,hotelserializer,contactserializer
+from rest_framework.decorators import api_view
+from django.views.generic import View
+from rest_framework import  status
+from rest_framework import generics
 
 # Create your views here.
 @login_required
@@ -74,9 +80,8 @@ def plandetail(request):
     plane=Plane.objects.filter(fromcity=fromcity, tocity=tocity)
     train=Train.objects.filter(fromstation=fromcity,tostation=tocity)
     hotel=Hotel.objects.filter(city=tocity)
-    uf=Plan_ContactForm()
-    Plan_ContactForm.fields['contact'].choices = get_contact(request)
-    return render (request,'plan/plan_detail.html',locals())
+
+    return render (request,'plan/plan_detail_2.html',locals())
 
 def get_contact(request):
     r = [('', '----')]
@@ -202,3 +207,73 @@ def add_to_carthotel(request,id):
 def clean_carthotel(request):
     request.session["cart_hotel"] = Cart_hotel()
     return view_carthotel(request)
+
+
+class PlaneList(APIView):
+    def get(self, request, format=None):
+        planes = Plane.objects.all()
+        plansserializer = planserializer(planes, many=True)
+        return Response(plansserializer.data)
+
+class TrainList(APIView):
+    def get(self, request, format=None):
+        trains = Train.objects.all()
+        trainsserializer = trainserializer(trains, many=True)
+        return Response(trainsserializer.data)
+
+class HotelList(APIView):
+    def get(self, request, format=None):
+        hotels = Hotel.objects.all()
+        hotelsserializer = hotelserializer(hotels, many=True)
+        return Response(hotelsserializer.data)
+
+plan_field_list = ['id', 'plan_id', {'contact': ['id', 'name']}]
+#获取当前用户的联系人列表
+class contactlist(APIView):
+    def get(self, request, format=None):
+        customerid = request.session.get('userid', default=None)
+        #contacts = Contact.objects.filter(customer=customerid)
+        contacts = Contact.objects.all()
+        serializer = contactserializer(contacts, many=True)
+        return Response(serializer.data)
+    def post(self,request,format=None):
+        customer_list=request.POST.getlist('chk')
+        planid=request.POST.get('planid')
+        plan=Plan.objects.get(id=planid)
+        plan.contact.clear()
+        plan.contact.add(*customer_list)
+        contact=plan.contact.all()
+        serializer = contactserializer(contact, many=True)
+        return Response(serializer.data)
+
+
+class contactview(View):
+    def get(self, request):
+        _list = Plan.objects.all()
+        _rtn = [i.serializable_values(plan_field_list) for i in _list]
+        result = {"data": _rtn}
+        return JsonResponse(result)
+
+
+#获取某个联系人操作
+@api_view(['GET','PUT','DELETE'])
+def contact_detail(request,pk):
+    try:
+        contacts = Contact.objects.get(pk=pk)
+    except Contact.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = contactserializer(contacts)
+        return Response(serializer.data)
+    elif request.method=='PUT':
+        serializer = contactserializer(contacts,data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+    elif request.method=='DELETE':
+        contacts.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+

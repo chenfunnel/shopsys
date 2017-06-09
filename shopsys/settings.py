@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'shopsys.apps.catalog',
     'shopsys.apps.regist',
     'shopsys.apps.plan',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
