@@ -77,11 +77,11 @@ def plandetail(request):
     plan=Plan.objects.get(id=planid)
     fromcity=plan.fromcity
     tocity=plan.tocity
-    plane=Plane.objects.filter(fromcity=fromcity, tocity=tocity)
-    train=Train.objects.filter(fromstation=fromcity,tostation=tocity)
-    hotel=Hotel.objects.filter(city=tocity)
-
-    return render (request,'plan/plan_detail_2.html',locals())
+    planes=Plane.objects.filter(fromcity=fromcity, tocity=tocity)
+    trains=Train.objects.filter(fromstation=fromcity,tostation=tocity)
+    hotels=Hotel.objects.filter(city=tocity)
+    contacts=Contact.objects.filter(customer=customerid)
+    return render (request,'plan/plan_detail_3.html',locals())
 
 def get_contact(request):
     r = [('', '----')]

@@ -1,0 +1,366 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block body %}
+<div class="container-fluid">
+  <div class="plan_top">
+        <nav class="navbar navbar-default">
+
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">计划详细</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="danger">
+                            <a href="#">
+                                <i class="ti-panel"></i>
+								<p>欢迎【{{ username }}】</p>
+                            </a>
+                        </li>
+                        <li >
+                              <a href="/regist/login" >
+                                <i class="ti-bell"></i>
+                              <p>登录</p>
+	                          </a>
+                       	</li>
+						<li>
+                            <a href="/regist/logout">
+								<i class="ti-settings"></i>
+								<p>注销</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+        </nav>
+</div>
+
+<div class="plan_content">
+       <div class="plan_detail_left">
+          <div class="plan_1"> 	
+           <table width="100%">
+              <tr>
+                <td>&nbsp;</td>
+                <td width="20%" height="58" align="center"><span>出发地</span><br><span style="font-size: 22px; font; font-weight: bolder;">{{ plan.fromcity }}</span></td>
+                <td width="20%" align="center"><span>到达地</span><br><span style="font-size: 22px; font; font-weight: bolder;">{{ plan.tocity }}</span></td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td height="25">出发时间</td>
+                <td><strong>{{ plan.start_at|date:"Y-m-d"  }}</strong></td>
+                <td>返回时间</td>
+                <td><strong>{{ plan.back_at|date:"Y-m-d"  }}</strong></td>
+              </tr>
+              <tr>
+                <td height="25">目的地</td>
+                <td colspan="3"><strong>{{ plan.target }}</strong></td>
+                </tr>             
+              <tr>
+                <td height="40" colspan="4" align="center"><input class="button blue round" type="button" value="确认" onclick=""/></td>
+              </tr>
+           </table>
+     
+          </div>
+           <div id="plan_customer" class="plan_1_1">
+			 <table id="customerhead" width="100%" border="0" cellpadding="2">
+              <tr>
+                <td width="71%"><img src="{% static "/img/乘客.png" %}" width="34" height="35" /></td>
+                <td width="15%" align="center"><a class="btn-customer">选择</a></td>
+                <td width="14%">&nbsp;</td>
+              </tr>
+             </table>
+         </div>
+          <div id="plan_plane" class="plan_1_1" >
+				<table width="100%" border="0" cellpadding="2">
+  <tr>
+    <td width="71%"><img src="{% static "/img/plane.png" %}" width="34" height="35" /></td>
+    <td width="15%" align="center"><a class="btn-plane">选择</a></td>
+    <td width="14%" align="center">展开</td>
+  </tr>
+</table>
+
+         </div>
+           <div id="plan_train" class="plan_1_1" >
+               <table width="100%" border="0" cellpadding="2">
+  <tr>
+    <td width="71%"><img src="{% static "/img/火车.png" %}" width="34" height="35" /></td>
+    <td width="15%" align="center"><a class="btn-train">选择</a></td>
+    <td width="14%" align="center">展开</td>
+  </tr>
+</table>
+
+         </div>
+           <div id="plan_hotel" class="plan_1_1">
+              <table width="100%" border="0" cellpadding="2">
+  <tr>
+    <td width="71%"><img src="{% static "/img/酒店.png" %}" width="34" height="35" /></td>
+    <td width="15%" align="center"><a class="btn-hotel">选择</a></td>
+    <td width="14%" align="center">展开</td>
+  </tr>
+</table>
+
+         </div>
+           <div id="plan_1_4" class="plan_1_1">
+                <table width="100%">
+                  <tr>
+                    <td>总金额</td>
+                    <td align="right" >￥<font color="red" size="+2" >200</font></td>
+                    <td align="center" valign="middle"><input class="button blue round" type="button" value="提交" onclick="showdiv(3)"/></td>
+                  </tr>
+               	  </table>
+           </div>
+          
+  </div>
+
+      <div id="plan_2" class="plan_2">
+          <div>
+              <!-- Nav tabs -->
+              <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#contacts" aria-controls="home" role="tab" data-toggle="tab">联系人列表</a></li>
+                <li role="presentation"><a href="#planes" aria-controls="profile" role="tab" data-toggle="tab">飞机列表</a></li>
+                <li role="presentation"><a href="#trains" aria-controls="messages" role="tab" data-toggle="tab">火车列表</a></li>
+                <li role="presentation"><a href="#hotels" aria-controls="settings" role="tab" data-toggle="tab">酒店列表</a></li>
+              </ul>
+              <!-- Tab panes -->
+              <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="contacts">
+                    <table width="100%" class="table table-striped">
+                      <tr>
+                        <th width="15%"></th>
+                        <th width="15%">姓名</th>
+                        <th width="25%">身份证号</th>
+                        <th width="15">性别</th>
+                        <th width="13%">年龄</th>
+                        <th width="20%">联系电话</th>
+                      </tr>
+                    {% for line in contacts %}
+                        <tr>
+                            <td><input type="checkbox" name="customerchk" value="{{ item.id }}"></td>
+                            <td>{{ line.name }}</td>
+                            <td>{{ line.cardid }}</td>
+                            <td>{{ line.get_sex_display }}</td>
+                            <td>{{ line.age }}</td>
+                            <td>{{ line.telephone }}</td>
+                        </tr>
+                    {% endfor %}
+                    </table>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="planes">
+                    <table width="100%">
+                      <tr>
+                        <th width="24%">航班</th>
+                        <th width="17%">起飞时间</th>
+                        <th width="20"></th>
+                        <th width="13%">落地时间</th>
+                        <th width="10%">舱位</th>
+                        <th width="15%">价格</th>
+                        <th width="9%"></th>
+                      </tr>
+                        {% for line in planes %}
+                          <tr>
+                            <td width="24%">
+                            <span>{{ line.name }}{{ line.companyname }}</span><br>
+                             <span>{{ line.planetype }}</span>
+                             </td>
+                            <td width="17%" align="center">
+                            <span style="font-size: 18px; font; font-weight: bolder;">{{ line.start_at|date:"H:i"  }}</span><br>    <span>{{ line.fromstation }}</span>
+                            </td>
+                            <td width="9%" align="center">----></td>
+                            <td width="18%" align="center">
+                            <span style="font-size: 18px; font; font-weight: bolder;">{{ line.arrive_at|date:"H:i" }}</span><br>
+                             <span>{{ line.tostation }}</span>
+                            </td>
+                            <td>{{ line.classtype }}</td>
+                            <td align="right" >￥<font color="red" size="+2" >{{ line.price }}</font></td>
+                            <td align="center" valign="middle"><input class="button blue round" type="button" value="预定" onclick="showdiv(2)"/></td>
+                          </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="trains">
+                    <table width="100%">
+                      <tr>
+                        <th width="24%">车次</th>
+                        <th width="17%">开车时间</th>
+                        <th width="20"></th>
+                        <th width="13%">到达时间</th>
+                        <th width="10%">席次</th>
+                        <th width="15%">价格</th>
+                        <th width="9%"></th>
+                      </tr>
+                    {% for line in trains %}
+                      <tr>
+                        <td width="24%">
+                        <span>{{ line.name }}</span>
+                         </td>
+                        <td width="17%" align="center">{{ line.start_at|date:"H:i"  }}</td>
+                        <td width="9%" align="center">----></td>
+                        <td width="18%" align="center">{{ line.arrive_at|date:"H:i" }}</td>
+                        <td>{{ line.classtype }}</td>
+                        <td align="right" >￥<font color="red" size="+2" >{{ line.price }}</font></td>
+                        <td align="center" valign="middle"><input class="button blue round" type="button" value="预定" onclick="showdiv(2)"/></td>
+                      </tr>
+                    {% endfor %}
+                    </table>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="hotels">
+                    <table width="100%">
+                      <tr>
+                        <th width="17%">宾馆名称</th>
+                        <th width="13%">类型</th>
+                        <th width="10%">房型</th>
+                        <th width="15%">价格</th>
+                        <th width="9%"></th>
+                      </tr>
+                      {% for line in hotels %}
+                      <tr>
+                        <td width="24%">{{ line.name }} </td>
+                        <td width="17%" align="center">{{ line.hoteltype }}</td>
+                        <td width="18%" align="center">{{ line.classtype }}</td>
+                        <td align="right" >￥<font color="red" size="+2" >{{ line.price }}</font></td>
+                        <td align="center" valign="middle"><input class="button blue round" type="button" value="预定" onclick="showdiv(2)"/></td>
+                      </tr>
+                    {% endfor %}
+                    </table>
+                </div>
+              </div>
+            </div>
+      </div>
+
+
+</div>
+
+<div class="plan_detail_foot">                
+             &copy; <script>document.write(new Date().getFullYear())</script>, 制作单位：西安前站信息技术有限公司
+</div>
+
+</div>
+<div id=plan_select style="display: none; POSITION: absolute; left: 50%; top: 50%; width: 700px; height: 500px; margin-left: -300px; margin-top: -200px; border: 1px solid #888; background-color: #FFF; padding-left: 10px; padding-right: 10px;">
+        详细选择
+</div>
+
+<script language="javascript">
+
+function openWin(win){
+   document.getElementById(win).style.display="";
+}
+function closeWin(win){
+   document.getElementById(win).style.display="none";
+}
+
+$('.btn-customer').click(function () {
+    $.ajax({
+        type:"GET",
+        url:"/plan/contactlist/",
+        dataType:"json",
+        success:function (data) {
+            var tablehtml="<table class='table table-bordered table-hover'  ><tr class='success'><th >选择</th><th >编号</th><th>名称</th></tr>"
+            json_str=JSON.stringify(data)
+            json_data=JSON.parse(json_str)
+            //alert(json_data)
+            for (var i in json_data) {
+                item=json_data[i]
+                tablehtml+=('<tr><td width="80px"><input type="checkbox" name="customerchk" value="' + item.id+ '"></td><td width="100px">' + item.id + '</td><td width="100px">' + item.name+'</td></tr>' )
+            }
+            tablehtml+='</table><button class="save_customesel">保存</button>'
+            $("#select").empty() ;
+            $("#select").append(tablehtml)
+        }
+    })
+})
+$.ajaxSetup({
+　　data: {csrfmiddlewaretoken: '{{ csrf_token }}' },
+});
+$('#select').on("click",".save_customesel",function () {
+    var planid='{{ planid }}'
+    var contactsel = [];
+    $("input[name='customerchk']:checked").each(function () {
+        contactsel.push($(this).val());
+    });
+    $.ajax({
+        type: "POST",
+        url: "/plan/contactlist/",
+        traditional :true,
+        data:{"chk":contactsel,"planid":planid},
+        dataType: "json",
+        success: function (data) {
+            var tablehtml = "<table id='contacttab' class='table table-bordered table-hover' border='1' bordercolor='#ccc'><tr><th >编号</th><th>姓名</th></tr>"
+            json_str = JSON.stringify(data)
+            json_data = JSON.parse(json_str)
+            //alert(json_data)
+            for (var i in json_data) {
+                item = json_data[i]
+                tablehtml += ('<tr><td width="100px">' + item.id + '</td><td width="100px">' + item.name + '</td></tr>' )
+            }
+            tablehtml += '</table>'
+            //alert(tablehtml)
+            $("#contacttab").remove();
+            $("#customerhead").after(tablehtml)
+        }
+    })
+})
+
+$('.btn-plane').click(function () {
+    $.ajax({
+        type:"GET",
+        url:"/plan/planelist/",
+        dataType:"json",
+        success:function (data) {
+            var tablehtml="<table class='table table-bordered table-hover' border='1' bordercolor='#ccc'><tr><th >选择</th><th >编号</th><th>航班</th></tr>"
+            json_str=JSON.stringify(data)
+            json_data=JSON.parse(json_str)
+            //alert(json_data)
+            for (var i in json_data) {
+                item=json_data[i]
+                tablehtml+=('<tr><td width="80px"><input type="checkbox" name="customersel" value="' + item.id+ '"></td><td width="100px">' + item.id + '</td><td width="100px">' + item.name+'</td></tr>' )
+            }
+            tablehtml+='</table><button class="save_customesel">保存</button>'
+            $("#select").empty() ;
+            $("#select").append(tablehtml)
+        }
+    })
+})
+
+$('.btn-train').click(function () {
+    $.ajax({
+        type:"GET",
+        url:"/plan/trainlist/",
+        dataType:"json",
+        success:function (data) {
+            var tablehtml="<table class='table table-bordered table-hover' border='1' bordercolor='#ccc'><tr><th >选择</th><th >编号</th><th>车次</th></tr>"
+            json_str=JSON.stringify(data)
+            json_data=JSON.parse(json_str)
+            //alert(json_data)
+            for (var i in json_data) {
+                item=json_data[i]
+                tablehtml+=('<tr><td width="80px"><input type="checkbox" name="customersel" value="' + item.id+ '"></td><td width="100px">' + item.id + '</td><td width="100px">' + item.name+'</td></tr>' )
+            }
+            tablehtml+='</table><button class="save_customesel">保存</button>'
+            $("#select").empty() ;
+            $("#select").append(tablehtml)
+        }
+    })
+})
+
+$('.btn-hotel').click(function () {
+    $.ajax({
+        type:"GET",
+        url:"/plan/hotellist/",
+        dataType:"json",
+        success:function (data) {
+            var tablehtml="<table class='table table-bordered table-hover' border='1' bordercolor='#ccc'><tr><th >选择</th><th >编号</th><th>酒店</th></tr>"
+            json_str=JSON.stringify(data)
+            json_data=JSON.parse(json_str)
+            //alert(json_data)
+            for (var i in json_data) {
+                item=json_data[i]
+                tablehtml+=('<tr><td width="80px"><input type="checkbox" name="customersel" value="' + item.id+ '"></td><td width="100px">' + item.id + '</td><td width="100px">' + item.name+'</td></tr>' )
+            }
+            tablehtml+='</table><button class="save_customesel">保存</button>'
+            $("#select").empty() ;
+            $("#select").append(tablehtml)
+        }
+    })
+})
+</script>
+{% endblock %}
+
