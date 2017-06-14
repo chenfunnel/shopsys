@@ -55,56 +55,83 @@
                 <td colspan="3"><strong>{{ plan.target }}</strong></td>
                 </tr>             
               <tr>
-                <td height="40" colspan="4" align="center"><input class="button blue round" type="button" value="确认" onclick=""/></td>
+                <td height="30" colspan="4" align="center"><input class="btn btn-success" type="button" value="确认" onclick=""/></td>
               </tr>
            </table>
      
           </div>
-           <div id="plan_customer" class="plan_1_1">
-			 <table id="customerhead" width="100%" border="0" cellpadding="2">
-              <tr>
-                <td width="71%"><img src="{% static "/img/乘客.png" %}" width="34" height="35" /></td>
-                <td width="15%" align="center"><a class="btn-customer">选择</a></td>
-                <td width="14%">&nbsp;</td>
-              </tr>
-             </table>
-         </div>
-          <div id="plan_plane" class="plan_1_1" >
-				<table width="100%" border="0" cellpadding="2">
-  <tr>
-    <td width="71%"><img src="{% static "/img/plane.png" %}" width="34" height="35" /></td>
-    <td width="15%" align="center"><a class="btn-plane">选择</a></td>
-    <td width="14%" align="center">展开</td>
-  </tr>
-</table>
 
-         </div>
-           <div id="plan_train" class="plan_1_1" >
-               <table width="100%" border="0" cellpadding="2">
-  <tr>
-    <td width="71%"><img src="{% static "/img/火车.png" %}" width="34" height="35" /></td>
-    <td width="15%" align="center"><a class="btn-train">选择</a></td>
-    <td width="14%" align="center">展开</td>
-  </tr>
-</table>
+           <div class="plan_1_1">
+             <div class="panel-group" id="accordion">
+	            <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h6 class="panel-title">
+                            <a  data-toggle="collapse" data-parent="#accordion"
+                               href="#collapseOne">
+                                <strong>计划人</strong>
+                            </a>
+                        </h6>
+                    </div>
+		            <div id="collapseOne" class="panel-collapse collapse in">
+                        <div id="contact" class="panel-body">
+                            计划人列表
+                        </div>
+		            </div>
+	            </div>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h5 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion"
+                               href="#collapseTwo">
+                                飞机
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            飞机列表
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h5 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion"
+                               href="#collapseThree">
+                                火车
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            火车列表
+                        </div>
+                    </div>
+                </div>
+               <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h5 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion"
+                               href="#collapse4">
+                                宾馆
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapse4" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            宾馆列表
+                        </div>
+                    </div>
+                </div>
+            </div>
+           </div>
 
-         </div>
-           <div id="plan_hotel" class="plan_1_1">
-              <table width="100%" border="0" cellpadding="2">
-  <tr>
-    <td width="71%"><img src="{% static "/img/酒店.png" %}" width="34" height="35" /></td>
-    <td width="15%" align="center"><a class="btn-hotel">选择</a></td>
-    <td width="14%" align="center">展开</td>
-  </tr>
-</table>
-
-         </div>
            <div id="plan_1_4" class="plan_1_1">
                 <table width="100%">
                   <tr>
                     <td>总金额</td>
                     <td align="right" >￥<font color="red" size="+2" >200</font></td>
-                    <td align="center" valign="middle"><input class="button blue round" type="button" value="提交" onclick="showdiv(3)"/></td>
+                    <td align="center" valign="middle"><input class="btn btn-info btn-sm" type="button" value="提交" onclick="showdiv(3)"/></td>
                   </tr>
                	  </table>
            </div>
@@ -122,7 +149,7 @@
               </ul>
               <!-- Tab panes -->
               <div class="tab-content">
-                <div role="tabpanel" class="tab-pane active" id="contacts">
+                <div role="tabpanel" class="tab-pane active in fade" id="contacts">
                     <table width="100%" class="table table-striped">
                       <tr>
                         <th width="15%"></th>
@@ -134,7 +161,7 @@
                       </tr>
                     {% for line in contacts %}
                         <tr>
-                            <td><input type="checkbox" name="customerchk" value="{{ item.id }}"></td>
+                            <td><input type="checkbox" name="customerchk" value='{{ line.id }}'></td>
                             <td>{{ line.name }}</td>
                             <td>{{ line.cardid }}</td>
                             <td>{{ line.get_sex_display }}</td>
@@ -143,8 +170,9 @@
                         </tr>
                     {% endfor %}
                     </table>
+                    <button id="save_customesel" class="btn btn-info">保存</button>
                 </div>
-                <div role="tabpanel" class="tab-pane" id="planes">
+                <div role="tabpanel" class="tab-pane fade" id="planes">
                     <table width="100%">
                       <tr>
                         <th width="24%">航班</th>
@@ -171,7 +199,7 @@
                             </td>
                             <td>{{ line.classtype }}</td>
                             <td align="right" >￥<font color="red" size="+2" >{{ line.price }}</font></td>
-                            <td align="center" valign="middle"><input class="button blue round" type="button" value="预定" onclick="showdiv(2)"/></td>
+                            <td align="center" valign="middle"><input id="planesel" planeid="{{ line.id }}" class="btn btn-primary btn-sm" type="button" value="预定" /></td>
                           </tr>
                         {% endfor %}
                     </table>
@@ -197,7 +225,7 @@
                         <td width="18%" align="center">{{ line.arrive_at|date:"H:i" }}</td>
                         <td>{{ line.classtype }}</td>
                         <td align="right" >￥<font color="red" size="+2" >{{ line.price }}</font></td>
-                        <td align="center" valign="middle"><input class="button blue round" type="button" value="预定" onclick="showdiv(2)"/></td>
+                        <td align="center" valign="middle"><input class="button blue round" type="button" value="预定" /></td>
                       </tr>
                     {% endfor %}
                     </table>
@@ -217,7 +245,7 @@
                         <td width="17%" align="center">{{ line.hoteltype }}</td>
                         <td width="18%" align="center">{{ line.classtype }}</td>
                         <td align="right" >￥<font color="red" size="+2" >{{ line.price }}</font></td>
-                        <td align="center" valign="middle"><input class="button blue round" type="button" value="预定" onclick="showdiv(2)"/></td>
+                        <td align="center" valign="middle"><input class="button blue round" type="button" value="预定" /></td>
                       </tr>
                     {% endfor %}
                     </table>
@@ -270,7 +298,7 @@ $('.btn-customer').click(function () {
 $.ajaxSetup({
 　　data: {csrfmiddlewaretoken: '{{ csrf_token }}' },
 });
-$('#select').on("click",".save_customesel",function () {
+$('#save_customesel').click(function () {
     var planid='{{ planid }}'
     var contactsel = [];
     $("input[name='customerchk']:checked").each(function () {
@@ -283,81 +311,43 @@ $('#select').on("click",".save_customesel",function () {
         data:{"chk":contactsel,"planid":planid},
         dataType: "json",
         success: function (data) {
-            var tablehtml = "<table id='contacttab' class='table table-bordered table-hover' border='1' bordercolor='#ccc'><tr><th >编号</th><th>姓名</th></tr>"
+            var tablehtml = "<table id='contacttab' class='table table-striped' ><tr><th >编号</th><th>姓名</th></tr>"
             json_str = JSON.stringify(data)
             json_data = JSON.parse(json_str)
-            //alert(json_data)
-            for (var i in json_data) {
+             for (var i in json_data) {
                 item = json_data[i]
                 tablehtml += ('<tr><td width="100px">' + item.id + '</td><td width="100px">' + item.name + '</td></tr>' )
             }
             tablehtml += '</table>'
             //alert(tablehtml)
-            $("#contacttab").remove();
-            $("#customerhead").after(tablehtml)
+            $("#contact").empty();
+            $("#contact").append(tablehtml)
         }
     })
 })
 
-$('.btn-plane').click(function () {
-    $.ajax({
-        type:"GET",
-        url:"/plan/planelist/",
-        dataType:"json",
-        success:function (data) {
-            var tablehtml="<table class='table table-bordered table-hover' border='1' bordercolor='#ccc'><tr><th >选择</th><th >编号</th><th>航班</th></tr>"
-            json_str=JSON.stringify(data)
-            json_data=JSON.parse(json_str)
-            //alert(json_data)
-            for (var i in json_data) {
-                item=json_data[i]
-                tablehtml+=('<tr><td width="80px"><input type="checkbox" name="customersel" value="' + item.id+ '"></td><td width="100px">' + item.id + '</td><td width="100px">' + item.name+'</td></tr>' )
-            }
-            tablehtml+='</table><button class="save_customesel">保存</button>'
-            $("#select").empty() ;
-            $("#select").append(tablehtml)
-        }
-    })
-})
+$('#planesel').click(function () {
+    var planid='{{ planid }}'
+    var planeid = $(this).attr("planeid");
 
-$('.btn-train').click(function () {
     $.ajax({
-        type:"GET",
-        url:"/plan/trainlist/",
-        dataType:"json",
-        success:function (data) {
-            var tablehtml="<table class='table table-bordered table-hover' border='1' bordercolor='#ccc'><tr><th >选择</th><th >编号</th><th>车次</th></tr>"
-            json_str=JSON.stringify(data)
-            json_data=JSON.parse(json_str)
-            //alert(json_data)
-            for (var i in json_data) {
-                item=json_data[i]
-                tablehtml+=('<tr><td width="80px"><input type="checkbox" name="customersel" value="' + item.id+ '"></td><td width="100px">' + item.id + '</td><td width="100px">' + item.name+'</td></tr>' )
+        type: "POST",
+        url: "/plan/planeselect/",
+        traditional :true,
+        data:{"planeid":planeid,"planid":planid},
+        dataType: "json",
+        success: function (data) {
+            var tablehtml = "<table id='contacttab' class='table table-striped' ><tr><th >编号</th><th>航班</th></tr>"
+            json_str = JSON.stringify(data)
+            json_data = JSON.parse(json_str)
+             for (var i in json_data) {
+                item = json_data[i]
+                tablehtml += ('<tr><td width="100px">' + item.id + '</td><td width="100px">' + item.name + '</td></tr>' )
             }
-            tablehtml+='</table><button class="save_customesel">保存</button>'
-            $("#select").empty() ;
-            $("#select").append(tablehtml)
-        }
-    })
-})
-
-$('.btn-hotel').click(function () {
-    $.ajax({
-        type:"GET",
-        url:"/plan/hotellist/",
-        dataType:"json",
-        success:function (data) {
-            var tablehtml="<table class='table table-bordered table-hover' border='1' bordercolor='#ccc'><tr><th >选择</th><th >编号</th><th>酒店</th></tr>"
-            json_str=JSON.stringify(data)
-            json_data=JSON.parse(json_str)
-            //alert(json_data)
-            for (var i in json_data) {
-                item=json_data[i]
-                tablehtml+=('<tr><td width="80px"><input type="checkbox" name="customersel" value="' + item.id+ '"></td><td width="100px">' + item.id + '</td><td width="100px">' + item.name+'</td></tr>' )
-            }
-            tablehtml+='</table><button class="save_customesel">保存</button>'
-            $("#select").empty() ;
-            $("#select").append(tablehtml)
+            tablehtml += '</table>'
+            //alert(tablehtml)
+            $("#contact").empty();
+            $("#contact").append(tablehtml)
         }
     })
 })

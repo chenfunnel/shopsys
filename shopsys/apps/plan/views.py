@@ -83,13 +83,7 @@ def plandetail(request):
     contacts=Contact.objects.filter(customer=customerid)
     return render (request,'plan/plan_detail_3.html',locals())
 
-def get_contact(request):
-    r = [('', '----')]
-    customerid = request.session.get('userid', default=None)
-    contact_list = Contact.objects.filter(customer_id=customerid)
-    for obj in contact_list:
-       r = r + [(obj.id, obj.name)]
-    return r
+
 #飞机
 
 #飞机列表类
